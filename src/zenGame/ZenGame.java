@@ -29,6 +29,7 @@ public class ZenGame {
 			this.playerName2 = playerName2;
 			pawnGame = new ArrayList<Pawn>();
 			this.initializeMode();
+			this.initializePawn();
 			gamePlay = new GameManager(this.pawnGame, this.playerName, this.playerName2, this.mode);
 		} else {
 			System.err.println("Name must be initialized");
@@ -81,5 +82,9 @@ public class ZenGame {
 			this.gameType = GraphicType.Graphic;
 		}
 		System.out.println(gameType);
+	}
+
+	public void initializePawn(){
+
 	}
 }

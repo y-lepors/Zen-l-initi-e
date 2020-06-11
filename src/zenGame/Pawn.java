@@ -9,16 +9,21 @@ public class Pawn {
 	private Type type;
 	private int xOrigin;
 	private int yOrigin;
+	private boolean isAlive;
 
 	/**
 	 * Initialize the pawn
 	 * @param x The x coordinate
 	 * @param y The y coordinate
-	 * @param color The pawn color
+	 * @param type The pawn color
 	 */
-	public Pawn(int x, int y, Type color) {
-		// TODO - implement Pawn.Pawn
-		throw new UnsupportedOperationException();
+	public Pawn(int x, int y, Type type) {
+		if(x < GameManager.width && x >= 0 && y < GameManager.height && y >= 0 && type != null){
+			this.xOrigin = x;
+			this.yOrigin = y;
+			this.type = type;
+			this.isAlive = true;
+		}
 	}
 
 	/**

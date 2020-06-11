@@ -13,12 +13,13 @@ public class GameManager {
 	private Player firstPlayer;
 	private Player secondPlayer;
 	private Player current;
-	ArrayList<Square> grid;
+	protected Square[][] grid;
 	private ArrayList<Pawn> pawnGame;
 	public final static int width = 11;
 	public final static int height = 11;
 	public int playerNumber = 0;
 	private Mode mode;
+	public static final String ANSI_CYAN = "\u001B[36m";
 
 	/**
 	 * Initialize every variables
@@ -27,6 +28,7 @@ public class GameManager {
 	 * @param playerName2 The second player name
 	 */
 	public GameManager(ArrayList<Pawn> pawnGame, String playerName, String playerName2, Mode mode) {
+		this.description();
 		if(pawnGame != null && playerName != null && playerName2 != null && mode != null){
 			this.pawnGame = pawnGame;
 			this.mode = mode;
@@ -40,6 +42,7 @@ public class GameManager {
 				this.secondPlayer = new AutoPlayer(pawnGame, playerName2, this.playerNumber);
 			}
 			this.current = firstPlayer;
+			this.initializeGrid();
 		}
 	}
 
@@ -47,16 +50,21 @@ public class GameManager {
 	 * Initialize the grid composed of square
 	 */
 	public void initializeGrid() {
-		// TODO - implement GameManager.inititializeGrid
-		throw new UnsupportedOperationException();
+		this.grid = new Square[width][height];
+		for(int i = 0 ; i < width ; i++){
+			for(int j = 0 ; j < height ; j++){
+				this.grid[i][j] = new Square(i,j);
+			}
+		}
 	}
+
+
 
 	/**
 	 * Initialize the pawn placement at the start of the game
 	 */
 	public void initializePawnPlacement() {
-		// TODO - implement GameManager.initializePawnPlacement
-		throw new UnsupportedOperationException();
+
 	}
 
 	/**
@@ -80,16 +88,26 @@ public class GameManager {
 	 * @return A string with de description
 	 */
 	public String description() {
-		// TODO - implement GameManager.description
-		throw new UnsupportedOperationException();
+		System.out.println(ANSI_CYAN + " ########\\ ########\\ ##\\   ##\\      ##\\  ##\\  ######\\ ##\\   ##\\ ######\\  ######\\ ######\\ ########\\\n" +
+				" \\____##  |##  _____|###\\  ## |     ## | #  | \\_##  _|###\\  ## |\\_##  _| \\_## __|\\_##  _|##  _____|\n" +
+				"    ##   / ## |      ####\\ ## |     ## | \\_/    ##  | ####\\ ## |  ##  |    ## |    ##  | ## |\n" +
+				"   ##   /  #####\\    ## ##\\## |     ## |        ##  | ## ##\\## |  ##  |    ## |    ##  | #####\\\n" +
+				"  ##   /   ##  __|   ## \\#### |     ## |        ##  | ## \\#### |  ##  |    ## |    ##  | ##  __|\n" +
+				" ##   /    ## |      ## |\\### |     ## |        ##  | ## |\\### |  ##  |    ## |    ##  | ##\n" +
+				"########\\  ########\\ ## | \\## |     ########\\ ######\\ ## | \\## |######\\    ## |  ######\\ ########\\\n" +
+				"\\________| \\________|\\__|  \\__|     \\________|\\______|\\__|  \\__|\\______|   \\__|  \\______|\\________|");
+		return null;
 	}
 
 	/**
 	 * Change the current player
 	 */
 	private void changeCurrent() {
-		// TODO - implement GameManager.changeCurrent
-		throw new UnsupportedOperationException();
+		if(this.current.equals(this.firstPlayer)){
+			this.current = this.secondPlayer;
+		} else if(this.current.equals(this.secondPlayer)){
+			this.current = this.firstPlayer;
+		}
 	}
 
 	/**
