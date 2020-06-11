@@ -17,16 +17,18 @@ public class Square {
 	 * @param y The y coordinate
 	 */
 	public Square(int x, int y) {
-		// TODO - implement Square.Square
-		throw new UnsupportedOperationException();
+		if(x < GameManager.width && x >= 0 && y < GameManager.height && y >= 0){
+			this.x = x;
+			this.y = y;
+			this.free = true;
+		}
 	}
 
 	/**
 	 * This method set the free to false
 	 */
 	public void setBusy() {
-		// TODO - implement Square.setBusy
-		throw new UnsupportedOperationException();
+		this.free = false;
 	}
 
 	/**
@@ -34,8 +36,11 @@ public class Square {
 	 * @return true if the square is free
 	 */
 	public boolean isFree() {
-		// TODO - implement Square.isFree
-		throw new UnsupportedOperationException();
+		boolean ret = false;
+		if(this.free){
+			ret = true;
+		}
+		return ret;
 	}
 
 	/**

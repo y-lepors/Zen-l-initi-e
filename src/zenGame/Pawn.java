@@ -37,6 +37,10 @@ public class Pawn {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * Get the pawn type
+	 * @return the pawn type
+	 */
 	public Type getType() {
 		return type;
 	}

@@ -1,5 +1,6 @@
 package zenGame;
 
+import javax.swing.*;
 import java.util.*;
 
 /**
@@ -14,6 +15,7 @@ public class ZenGame {
 	private ArrayList<Pawn> pawnGame;
 	private String playerName;
 	private String playerName2;
+	private GraphicType gameType;
 
 	/**
 	 * Initialize the player name
@@ -21,6 +23,7 @@ public class ZenGame {
 	 * @param playerName2 The second player name
 	 */
 	public ZenGame(String playerName, String playerName2) {
+		this.askGameType();
 		if(playerName != null && playerName2 != null){
 			this.playerName = playerName;
 			this.playerName2 = playerName2;
@@ -57,5 +60,26 @@ public class ZenGame {
 				System.err.println("Mauvaise valeur recommencer :");
 			}
 		}
+	}
+
+	/**
+	 * Ask the user about the graphic type
+	 * @return The graphic type to use
+	 */
+	public void askGameType() {
+
+		Object[] type = {"Console", "Graphic"};
+		int index = JOptionPane.showOptionDialog(null,
+				"Quel mode de jeu ?",
+				"Mode de jeu",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE,
+				new ImageIcon("./data/logo_Zen.png"), type, type[0]);
+		if(index == 0){
+			this.gameType = GraphicType.Console;
+		} else {
+			this.gameType = GraphicType.Graphic;
+		}
+		System.out.println(gameType);
 	}
 }

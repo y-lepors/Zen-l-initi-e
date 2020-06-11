@@ -1,5 +1,6 @@
 package zenGame;
 
+import javax.swing.*;
 import java.util.*;
 
 /**
@@ -14,8 +15,8 @@ public class GameManager {
 	private Player current;
 	ArrayList<Square> grid;
 	private ArrayList<Pawn> pawnGame;
-	private final static int width = 11;
-	private final static int height = 11;
+	public final static int width = 11;
+	public final static int height = 11;
 	public int playerNumber = 0;
 	private Mode mode;
 
@@ -39,8 +40,6 @@ public class GameManager {
 				this.secondPlayer = new AutoPlayer(pawnGame, playerName2, this.playerNumber);
 			}
 			this.current = firstPlayer;
-
-
 		}
 	}
 
@@ -110,5 +109,4 @@ public class GameManager {
 		// TODO - implement GameManager.haveWin
 		throw new UnsupportedOperationException();
 	}
-
 }

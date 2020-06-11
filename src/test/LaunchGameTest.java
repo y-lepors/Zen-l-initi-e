@@ -1,6 +1,5 @@
 package test;
 
-import gameLauncher.GraphicType;
 import gameLauncher.LaunchGame;
 import zenGame.GameManager;
 import org.junit.After;
@@ -24,12 +23,5 @@ public class LaunchGameTest {
 
     public void testLaunchGame(){
         assertNotNull(l);
-    }
-
-    @Test
-    public void testAskGameType() {
-        GraphicType g = GraphicType.Console;
-        l.setGameType(g);
-        assertEquals(l, GraphicType.Console);
     }
 }
