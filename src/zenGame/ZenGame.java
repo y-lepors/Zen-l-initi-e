@@ -75,8 +75,26 @@ public class ZenGame {
 		pawnGame.add(new Pawn(2,7,Type.WHITE));
 		pawnGame.add(new Pawn(2,3,Type.WHITE));
 		pawnGame.add(new Pawn(4,1,Type.WHITE));
-		pawnGame.add(new Pawn(0,0,Type.WHITE));
-		pawnGame.add(new Pawn(0,0,Type.WHITE));
-		pawnGame.add(new Pawn(0,0,Type.WHITE));
+		pawnGame.add(new Pawn(6,1,Type.WHITE));
+		pawnGame.add(new Pawn(8,3,Type.WHITE));
+		pawnGame.add(new Pawn(10,5,Type.WHITE));
+		pawnGame.add(new Pawn(8,7,Type.WHITE));
+		pawnGame.add(new Pawn(6,9,Type.WHITE));
+		pawnGame.add(new Pawn(4,9,Type.WHITE));
+		pawnGame.add(new Pawn(10,10,Type.WHITE));
+
+		//BLACK PAWN
+		pawnGame.add(new Pawn(10,0,Type.BLACK));
+		pawnGame.add(new Pawn(5,0,Type.BLACK));
+		pawnGame.add(new Pawn(7,2,Type.BLACK));
+		pawnGame.add(new Pawn(2,3,Type.BLACK));
+		pawnGame.add(new Pawn(4,1,Type.BLACK));
+		pawnGame.add(new Pawn(6,1,Type.BLACK));
+		pawnGame.add(new Pawn(8,3,Type.BLACK));
+		pawnGame.add(new Pawn(10,5,Type.BLACK));
+		pawnGame.add(new Pawn(8,7,Type.BLACK));
+		pawnGame.add(new Pawn(6,9,Type.BLACK));
+		pawnGame.add(new Pawn(4,9,Type.BLACK));
+		pawnGame.add(new Pawn(0,10,Type.BLACK));
 	}
 }
