@@ -1,5 +1,9 @@
 package zenGame;
 
+import consoleView.GraphicGameMenu;
+import consoleView.IGameMenu;
+import consoleView.PrintGameMenu;
+
 import javax.swing.*;
 import java.util.*;
 
@@ -16,6 +20,7 @@ public class ZenGame {
 	private String playerName;
 	private String playerName2;
 	private GraphicType gameType;
+	private IGameMenu gameMenu;
 
 	/**
 	 * Initialize the player name
@@ -24,11 +29,16 @@ public class ZenGame {
 	 */
 	public ZenGame(String playerName, String playerName2) {
 		this.askGameType();
+		if(this.gameType.equals(GraphicType.Console)){
+			this.gameMenu = new PrintGameMenu();
+		} else if(this.gameType.equals(GraphicType.Graphic)){
+			this.gameMenu = new GraphicGameMenu();
+			GraphicGameMenu graphicGameMenu = new GraphicGameMenu();
+		}
 		if(playerName != null && playerName2 != null){
 			this.playerName = playerName;
 			this.playerName2 = playerName2;
-			pawnGame = new ArrayList<Pawn>();
-			this.initializeMode();
+			this.pawnGame = new ArrayList<Pawn>();
 			this.initializePawn();
 			gamePlay = new GameManager(this.pawnGame, this.playerName, this.playerName2, this.mode);
 		} else {
@@ -36,32 +46,6 @@ public class ZenGame {
 		}
 	}
 
-	/**
-	 * Ask the player about the mode
-	 */
-	private void initializeMode(){
-		Mode m = null;
-		boolean loop = false;
-		while(!loop) {
-			Scanner sc = new Scanner(System.in);
-			System.out.println("Veuillez séléctionner le mode :\n" +
-					"1 : HumainHumain \n" +
-					"2 : HumainRobot");
-			String str = sc.nextLine();
-
-			if(str.equals("1") || str.equals("HumainHumain")){
-				m = Mode.HumainHumain;
-				System.out.println("Vous avez choisi le mode humain humain");
-				loop = true;
-			} else if(str.equals("2") || str.equals("HumainRobot")){
-				System.out.println("Vous avez choisi le mode humain robot");
-				m = Mode.HumainRobot;
-				loop = true;
-			} else {
-				System.err.println("Mauvaise valeur recommencer :");
-			}
-		}
-	}
 
 	/**
 	 * Ask the user about the graphic type
@@ -85,6 +69,14 @@ public class ZenGame {
 	}
 
 	public void initializePawn(){
-
+		// WHITE PAWN
+		pawnGame.add(new Pawn(0,0,Type.WHITE));
+		pawnGame.add(new Pawn(0,5,Type.WHITE));
+		pawnGame.add(new Pawn(2,7,Type.WHITE));
+		pawnGame.add(new Pawn(2,3,Type.WHITE));
+		pawnGame.add(new Pawn(4,1,Type.WHITE));
+		pawnGame.add(new Pawn(0,0,Type.WHITE));
+		pawnGame.add(new Pawn(0,0,Type.WHITE));
+		pawnGame.add(new Pawn(0,0,Type.WHITE));
 	}
 }
