@@ -19,4 +19,14 @@ public class GraphicGameMenu implements IGameMenu {
 
         return null;
     }
+
+    @Override
+    public void printSecondPage(){
+
+    }
+
+    @Override
+    public void GamePage() {
+
+    }
 }

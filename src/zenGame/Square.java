@@ -7,9 +7,9 @@ package zenGame;
  */
 public class Square {
 
-	private boolean free;
 	private int x;
 	private int y;
+	private Pawn pawn;
 
 	/**
 	 * Initialize the square
@@ -20,15 +20,16 @@ public class Square {
 		if(x < GameManager.width && x >= 0 && y < GameManager.height && y >= 0){
 			this.x = x;
 			this.y = y;
-			this.free = true;
+			pawn = null;
 		}
 	}
 
 	/**
-	 * This method set the free to false
+	 * Set the pawn
+	 * @param pawn The pawn to set
 	 */
-	public void setBusy() {
-		this.free = false;
+	public void setPawn(Pawn pawn) {
+		this.pawn = pawn;
 	}
 
 	/**
@@ -37,17 +38,9 @@ public class Square {
 	 */
 	public boolean isFree() {
 		boolean ret = false;
-		if(this.free){
+		if(this.pawn != null){
 			ret = true;
 		}
 		return ret;
-	}
-
-	/**
-	 * Get the free
-	 * @return true if is free
-	 */
-	public boolean getFree(){
-		return this.free;
 	}
 }

@@ -19,16 +19,4 @@ public class SquareTest {
     public void tearDown() throws Exception {
         s = null;
     }
-
-    @Test
-    public void setBusy() {
-        s.setBusy();
-        assertEquals(s,false);
-    }
-
-    @Test
-    public void isFree() {
-        s.setBusy();
-        assertEquals(s, false);
-    }
 }

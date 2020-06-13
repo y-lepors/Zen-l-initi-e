@@ -68,6 +68,9 @@ public class ZenGame {
 		System.out.println(gameType);
 	}
 
+	/**
+	 * Initialize every pawn
+	 */
 	public void initializePawn(){
 		// WHITE PAWN
 		pawnGame.add(new Pawn(0,0,Type.WHITE));
@@ -87,14 +90,17 @@ public class ZenGame {
 		pawnGame.add(new Pawn(10,0,Type.BLACK));
 		pawnGame.add(new Pawn(5,0,Type.BLACK));
 		pawnGame.add(new Pawn(7,2,Type.BLACK));
-		pawnGame.add(new Pawn(2,3,Type.BLACK));
-		pawnGame.add(new Pawn(4,1,Type.BLACK));
-		pawnGame.add(new Pawn(6,1,Type.BLACK));
-		pawnGame.add(new Pawn(8,3,Type.BLACK));
-		pawnGame.add(new Pawn(10,5,Type.BLACK));
-		pawnGame.add(new Pawn(8,7,Type.BLACK));
-		pawnGame.add(new Pawn(6,9,Type.BLACK));
-		pawnGame.add(new Pawn(4,9,Type.BLACK));
+		pawnGame.add(new Pawn(9,4,Type.BLACK));
+		pawnGame.add(new Pawn(9,6,Type.BLACK));
+		pawnGame.add(new Pawn(7,8,Type.BLACK));
+		pawnGame.add(new Pawn(5,10,Type.BLACK));
+		pawnGame.add(new Pawn(3,8,Type.BLACK));
+		pawnGame.add(new Pawn(1,6,Type.BLACK));
+		pawnGame.add(new Pawn(1,4,Type.BLACK));
+		pawnGame.add(new Pawn(3,2,Type.BLACK));
 		pawnGame.add(new Pawn(0,10,Type.BLACK));
+
+		// ZEN PAWN
+		pawnGame.add(new Pawn(5,5,Type.ZEN));
 	}
 }
