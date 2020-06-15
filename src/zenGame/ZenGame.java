@@ -45,7 +45,7 @@ public class ZenGame {
 				this.gameMenu = new GraphicGameMenu();
 				GraphicGameMenu graphicGameMenu = new GraphicGameMenu();
 			}
-			gamePlay = new GameManager(this.pawnGame, this.playerName, this.playerName2, this.mode, this.gameMenu);
+			gamePlay = new GameManager(this.pawnGame, this.playerName, this.playerName2, this.mode, this.gameMenu, this.grid);
 		} else {
 			System.err.println("Name must be initialized");
 		}

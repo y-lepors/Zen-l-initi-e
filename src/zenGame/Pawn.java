@@ -29,17 +29,18 @@ public class Pawn {
 	/**
 	 * This method is used to change the coordinate of pawn
 	 */
-	public void newMove() {
-		// TODO - implement Pawn.newMove
-		throw new UnsupportedOperationException();
+	public void newMove(int x, int y) {
+		if(x < 11 && y < 11 && x >= 0 && x >= 0){
+			this.xOrigin = x;
+			this.yOrigin = y;
+		}
 	}
 
 	/**
 	 * This method is used to eliminate a pawn
 	 */
 	public void eliminatePawn() {
-		// TODO - implement Pawn.eliminatePawn
-		throw new UnsupportedOperationException();
+		this.isAlive = false;
 	}
 
 	/**
@@ -48,5 +49,21 @@ public class Pawn {
 	 */
 	public Type getType() {
 		return type;
+	}
+
+	/**
+	 * Get x origin
+	 * @return The X origin
+	 */
+	public int getxOrigin() {
+		return xOrigin;
+	}
+
+	/**
+	 * Get the y origin
+	 * @return The Y origin
+	 */
+	public int getyOrigin() {
+		return yOrigin;
 	}
 }

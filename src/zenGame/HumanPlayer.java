@@ -16,7 +16,6 @@ public class HumanPlayer extends Player {
 	 */
 	public HumanPlayer(ArrayList<Pawn> myPawn, String name, int playerNumber) {
 		super(myPawn, name, playerNumber);
-
 	}
 
 	/**

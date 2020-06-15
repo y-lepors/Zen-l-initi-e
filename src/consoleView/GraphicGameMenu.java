@@ -34,4 +34,9 @@ public class GraphicGameMenu implements IGameMenu {
     public void rulesPage() {
 
     }
+
+    @Override
+    public void loadPage() {
+
+    }
 }

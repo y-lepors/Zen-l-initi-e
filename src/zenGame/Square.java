@@ -48,9 +48,9 @@ public class Square {
 	 * @return true if the square is free
 	 */
 	public boolean isFree() {
-		boolean ret = false;
+		boolean ret = true;
 		if(this.pawn != null){
-			ret = true;
+			ret = false;
 		}
 		return ret;
 	}
@@ -63,10 +63,18 @@ public class Square {
 		return charType;
 	}
 
+	/**
+	 * Get the X coordinate
+	 * @return The X coordinate
+	 */
 	public int getX() {
 		return x;
 	}
 
+	/**
+	 * Get the y coordinate
+	 * @return The X coordinate
+	 */
 	public int getY() {
 		return y;
 	}

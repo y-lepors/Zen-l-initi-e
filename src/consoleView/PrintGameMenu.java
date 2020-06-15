@@ -31,8 +31,14 @@ public class PrintGameMenu implements IGameMenu{
 		this.nbY = grid[0].length;
 	}
 
+	/**
+	 * Use to print the first page on the terminal
+	 */
 	@Override
 	public void printFirstPage(){
+		for(int i = 0; i < 50 ; i++){
+			System.out.println();
+		}
 		System.out.println(ANSI_CYAN +
 				" ########\\ ########\\ ##\\   ##\\      ##\\  ##\\  ######\\ ##\\   ##\\ ######\\  ######\\ ######\\ ########\\\n" +
 				" \\____##  |##  _____|###\\  ## |     ## | #  | \\_##  _|###\\  ## |\\_##  _| \\_## __|\\_##  _|##  _____|\n" +
@@ -70,7 +76,7 @@ public class PrintGameMenu implements IGameMenu{
 				loop = true;
 				exit(0);
 			}else{
-				System.err.println("Mauvaise valeur recommencer :");
+				System.err.println("Mauvaise valeur recommencez :");
 			}
 		}
 	}
@@ -81,6 +87,9 @@ public class PrintGameMenu implements IGameMenu{
 	 */
 	@Override
 	public Mode initializeMode(){
+		for(int i = 0; i < 50 ; i++){
+			System.out.println();
+		}
 		System.out.println(ANSI_CYAN +
 				" ########\\ ########\\ ##\\   ##\\      ##\\  ##\\  ######\\ ##\\   ##\\ ######\\  ######\\ ######\\ ########\\\n" +
 				" \\____##  |##  _____|###\\  ## |     ## | #  | \\_##  _|###\\  ## |\\_##  _| \\_## __|\\_##  _|##  _____|\n" +
@@ -90,6 +99,7 @@ public class PrintGameMenu implements IGameMenu{
 				" ##   /    ## |      ## |\\### |     ## |        ##  | ## |\\### |  ##  |    ## |    ##  | ##\n" +
 				"########\\  ########\\ ## | \\## |     ########\\ ######\\ ## | \\## |######\\    ## |  ######\\ ########\\\n" +
 				"\\________| \\________|\\__|  \\__|     \\________|\\______|\\__|  \\__|\\______|   \\__|  \\______|\\________|" +ANSI_RESET);
+		System.out.println("\n");
 		Mode m = null;
 		boolean loop = false;
 		while(!loop) {
@@ -101,21 +111,27 @@ public class PrintGameMenu implements IGameMenu{
 
 			if(str.equals("1") || str.equals("HumainHumain")){
 				m = Mode.HumainHumain;
-				System.out.println("Vous avez choisi le mode humain humain");
+				System.out.println("Vous avez choisi le mode humain vs humain");
 				loop = true;
 			} else if(str.equals("2") || str.equals("HumainRobot")){
-				System.out.println("Vous avez choisi le mode humain robot");
+				System.out.println("Vous avez choisi le mode humain vs robot");
 				m = Mode.HumainRobot;
 				loop = true;
 			} else {
-				System.err.println("Mauvaise valeur recommencer :");
+				System.err.println("Mauvaise valeur recommencez :");
 			}
 		}
 		return m;
 	}
 
+	/**
+	 * Use to print the second page on the terminal
+	 */
 	@Override
 	public void printSecondPage() {
+		for(int i = 0; i < 50 ; i++){
+			System.out.println();
+		}
 		System.out.println(ANSI_CYAN +
 				" ########\\ ########\\ ##\\   ##\\      ##\\  ##\\  ######\\ ##\\   ##\\ ######\\  ######\\ ######\\ ########\\\n" +
 				" \\____##  |##  _____|###\\  ## |     ## | #  | \\_##  _|###\\  ## |\\_##  _| \\_## __|\\_##  _|##  _____|\n" +
@@ -132,6 +148,28 @@ public class PrintGameMenu implements IGameMenu{
 				"2 : CHARGER\n" +
 				"3 : RETOUR\n" +
 				"VOTRE CHOIX : ");
+
+		boolean loop = false;
+		while(!loop) {
+			Scanner sc = new Scanner(System.in);
+			String str = sc.nextLine();
+
+			if(str.equals("1") || str.equals("NOUVELLE PARTIE")){
+				System.out.println("Vous avez choisi \"NOUVELLE PARTIE\"");
+				loop = true;
+				this.initializeMode();
+			} else if(str.equals("2") || str.equals("CHARGER")){
+				System.out.println("Vous avez choisi \"CHARGER\" ");
+				loop = true;
+
+			} else if(str.equals("3") || str.equals("RETOUR")) {
+				System.out.println("Vous avez choisi \"RETOUR\" ");
+				loop = true;
+				this.printFirstPage();
+			}else{
+				System.err.println("Mauvaise valeur recommencez :");
+			}
+		}
 	}
 
 	/**
@@ -139,6 +177,9 @@ public class PrintGameMenu implements IGameMenu{
 	 */
 	@Override
 	public void gamePage() {
+		for(int i = 0; i < 50 ; i++){
+			System.out.println();
+		}
 
 		System.out.println(
 				"\n" +
@@ -151,7 +192,6 @@ public class PrintGameMenu implements IGameMenu{
 			}
 			System.out.println(" | " + i);
 			System.out.println("                                                                                         |");
-			//System.out.println("                                                                                         |");
 		}
 		System.out.println("	+-------------------------------------------------------------------------------------+");
 		System.out.println("       0       1       2       3       4       5       6       7       8       9       10");
@@ -163,6 +203,14 @@ public class PrintGameMenu implements IGameMenu{
 	@Override
 	public void rulesPage(){
 		System.out.println("LES REGLES :");
+	}
+
+	/**
+	 * Use to print the load page on the terminal
+	 */
+	@Override
+	public void loadPage() {
+		System.out.println("LOAD PAGE");
 	}
 
 }

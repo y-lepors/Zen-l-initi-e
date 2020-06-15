@@ -28,8 +28,9 @@ public class GameManager {
 	 * @param playerName The first player name
 	 * @param playerName2 The second player name
 	 */
-	public GameManager(ArrayList<Pawn> pawnGame, String playerName, String playerName2, Mode mode, IGameMenu gameMenu) {
+	public GameManager(ArrayList<Pawn> pawnGame, String playerName, String playerName2, Mode mode, IGameMenu gameMenu, Square[][] grid) {
 		this.description();
+		this.grid = grid;
 		this.gameMenu = gameMenu;
 		if(pawnGame != null && playerName != null && playerName2 != null && mode != null){
 			this.pawnGame = pawnGame;
@@ -54,13 +55,6 @@ public class GameManager {
 		this.gameMenu.gamePage();
 	}
 
-
-	/**
-	 * Initialize the pawn placement at the start of the game
-	 */
-	public void initializePawnPlacement() {
-
-	}
 
 	/**
 	 * This method start the game and make the loop that makes the game work
@@ -122,5 +116,164 @@ public class GameManager {
 	 */
 	public Square[][] getGrid() {
 		return grid;
+	}
+
+	/**
+	 * Verif every possible move and return an ArrayList with every move
+	 * @param posX The posX
+	 * @param posY The posY
+	 * @return A arrayList of every possible move
+	 */
+	public ArrayList<String> whichMove(int posX, int posY){
+		ArrayList<String> ret = new ArrayList<String>();
+
+		if(posX < 10 && posY < 10 && posX > 0 && posY > 0){
+			if(this.grid[posX + 1][posY + 1].isFree()){
+				ret.add((posX+1) + "," + (posY+1));
+			}
+			if (this.grid[posX + 1][posY].isFree()){
+				ret.add((posX +1)+ ","+posY);
+			}
+			if(this.grid[posX][posY +1].isFree()) {
+				ret.add(posX+","+(posY+1));
+			}
+			if(this.grid[posX - 1][posY - 1].isFree()){
+				ret.add((posX-1)+","+(posY-1));
+			}
+			if(this.grid[posX][posY - 1].isFree()){
+				ret.add(posX+","+(posY-1));
+			}
+			if(this.grid[posX - 1][posY].isFree()){
+				ret.add((posX-1)+","+posY);
+			}
+			if(this.grid[posX + 1][posY - 1].isFree()){
+				ret.add((posX+1)+","+(posY-1));
+			}
+			if(this.grid[posX - 1][posY + 1].isFree()){
+				ret.add((posX-1)+","+(posY+1));
+			}
+		}
+
+		else if(posX == 10 && posY < 10 && posY > 0){
+			if(this.grid[posX - 1][posY - 1].isFree()){
+				ret.add((posX-1)+","+(posY-1));
+			}
+			if(this.grid[posX][posY + 1].isFree()){
+				ret.add((posX)+","+(posY+1));
+			}
+			if(this.grid[posX][posY - 1].isFree()){
+				ret.add((posX)+","+(posY-1));
+			}
+			if(this.grid[posX - 1][posY].isFree()){
+				ret.add((posX-1)+","+(posY));
+			}
+			if(this.grid[posX - 1][posY + 1].isFree()){
+				ret.add((posX-1)+","+(posY+1));
+			}
+		}
+
+		else if(posX == 0 && posY < 10 && posY > 0){
+			if(this.grid[posX + 1][posY + 1].isFree()){
+				ret.add((posX+1)+","+(posY+1));
+			}
+			if(this.grid[posX][posY + 1].isFree()){
+				ret.add((posX)+","+(posY+1));
+			}
+			if(this.grid[posX][posY - 1].isFree()){
+				ret.add((posX)+","+(posY-1));
+			}
+			if(this.grid[posX + 1][posY].isFree()){
+				ret.add((posX+1)+","+(posY));
+			}
+			if(this.grid[posX + 1][posY - 1].isFree()){
+				ret.add((posX+1)+","+(posY-1));
+			}
+		}
+
+		else if(posY == 0 && posX < 10 && posX > 0){
+			if(this.grid[posX + 1][posY + 1].isFree()){
+				ret.add((posX+1)+","+(posY+1));
+			}
+			if(this.grid[posX][posY + 1].isFree()){
+				ret.add((posX)+","+(posY+1));
+			}
+			if(this.grid[posX-1][posY + 1].isFree()){
+				ret.add((posX-1)+","+(posY+1));
+			}
+			if(this.grid[posX + 1][posY].isFree()){
+				ret.add((posX+1)+","+(posY));
+			}
+			if(this.grid[posX - 1][posY].isFree()){
+				ret.add((posX-1)+","+(posY));
+			}
+		}
+
+		else if(posY == 10 && posX < 10 && posX > 0){
+			if(this.grid[posX + 1][posY - 1].isFree()){
+				ret.add((posX+1)+","+(posY-1));
+			}
+			if(this.grid[posX][posY - 1].isFree()){
+				ret.add((posX)+","+(posY-1));
+			}
+			if(this.grid[posX-1][posY - 1].isFree()){
+				ret.add((posX-1)+","+(posY-1));
+			}
+			if(this.grid[posX + 1][posY].isFree()){
+				ret.add((posX+1)+","+(posY));
+			}
+			if(this.grid[posX - 1][posY].isFree()){
+				ret.add((posX-1)+","+(posY));
+			}
+		}
+
+		 else if(posX == 0 && posY == 0){
+			if(this.grid[posX + 1][posY + 1].isFree()){
+				ret.add((posX+1)+","+(posY+1));
+			}
+			if(this.grid[posX + 1][posY].isFree()){
+				ret.add((posX+1)+","+(posY));
+			}
+			if(this.grid[posX][posY + 1].isFree()){
+				ret.add((posX)+","+(posY + 1));
+			}
+		}
+
+		else if(posX == 10 && posY == 0){
+			if(this.grid[posX - 1][posY + 1].isFree()){
+				ret.add((posX-1)+","+(posY+1));
+			}
+			if(this.grid[posX - 1][posY].isFree()){
+				ret.add((posX-1)+","+(posY));
+			}
+			if(this.grid[posX][posY + 1].isFree()){
+				ret.add((posX)+","+(posY + 1));
+			}
+		}
+
+		 else if(posX == 0 && posY == 10){
+			if(this.grid[posX + 1][posY - 1].isFree()){
+				ret.add((posX+1)+","+(posY-1));
+			}
+			if(this.grid[posX + 1][posY].isFree()){
+				ret.add((posX+1)+","+(posY));
+			}
+			if(this.grid[posX][posY - 1].isFree()){
+				ret.add((posX)+","+(posY - 1));
+			}
+		}
+
+		else if(posX == 10 && posY == 10){
+			if(this.grid[posX - 1][posY - 1].isFree()){
+				ret.add((posX-1)+","+(posY-1));
+			}
+			if(this.grid[posX - 1][posY].isFree()){
+				ret.add((posX-1)+","+(posY));
+			}
+			if(this.grid[posX][posY - 1].isFree()){
+				ret.add((posX)+","+(posY - 1));
+			}
+		}
+
+		return ret;
 	}
 }

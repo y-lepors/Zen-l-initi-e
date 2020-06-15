@@ -51,4 +51,6 @@ public abstract class Player {
 		// TODO - implement Player.verifMove
 		throw new UnsupportedOperationException();
 	}
+
+
 }
