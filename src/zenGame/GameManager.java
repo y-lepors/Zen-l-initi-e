@@ -1,5 +1,8 @@
 package zenGame;
 
+import consoleView.IGameMenu;
+import consoleView.PrintGameMenu;
+
 import java.util.*;
 
 /**
@@ -14,10 +17,9 @@ public class GameManager {
 	private Player current;
 	protected Square[][] grid;
 	private ArrayList<Pawn> pawnGame;
-	public final static int width = 11;
-	public final static int height = 11;
 	public int playerNumber = 0;
 	private Mode mode;
+	private IGameMenu gameMenu;
 
 
 	/**
@@ -26,8 +28,9 @@ public class GameManager {
 	 * @param playerName The first player name
 	 * @param playerName2 The second player name
 	 */
-	public GameManager(ArrayList<Pawn> pawnGame, String playerName, String playerName2, Mode mode) {
+	public GameManager(ArrayList<Pawn> pawnGame, String playerName, String playerName2, Mode mode, IGameMenu gameMenu) {
 		this.description();
+		this.gameMenu = gameMenu;
 		if(pawnGame != null && playerName != null && playerName2 != null && mode != null){
 			this.pawnGame = pawnGame;
 			this.mode = mode;
@@ -41,53 +44,15 @@ public class GameManager {
 				this.secondPlayer = new AutoPlayer(pawnGame, playerName2, this.playerNumber);
 			}
 			this.current = firstPlayer;
-			this.initializeGrid();
 		}
 	}
 
 	/**
-	 * Initialize the grid composed of square
+	 * This method display the grid
 	 */
-	public void initializeGrid() {
-		this.grid = new Square[width][height];
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				this.grid[i][j] = new Square(i, j);
-			}
-		}
-		// WHITE PAWN
-		this.grid[0][0].setPawn(pawnGame.get(0));
-		this.grid[0][5].setPawn(pawnGame.get(1));
-		this.grid[2][7].setPawn(pawnGame.get(2));
-		this.grid[2][3].setPawn(pawnGame.get(3));
-		this.grid[4][1].setPawn(pawnGame.get(4));
-		this.grid[6][1].setPawn(pawnGame.get(5));
-		this.grid[8][3].setPawn(pawnGame.get(6));
-		this.grid[10][5].setPawn(pawnGame.get(7));
-		this.grid[8][7].setPawn(pawnGame.get(8));
-		this.grid[6][9].setPawn(pawnGame.get(9));
-		this.grid[4][9].setPawn(pawnGame.get(10));
-		this.grid[10][10].setPawn(pawnGame.get(11));
-
-		// BLACK PAWN
-		this.grid[10][0].setPawn(pawnGame.get(12));
-		this.grid[5][0].setPawn(pawnGame.get(13));
-		this.grid[7][2].setPawn(pawnGame.get(14));
-		this.grid[9][4].setPawn(pawnGame.get(15));
-		this.grid[9][6].setPawn(pawnGame.get(16));
-		this.grid[7][8].setPawn(pawnGame.get(17));
-		this.grid[5][10].setPawn(pawnGame.get(18));
-		this.grid[3][8].setPawn(pawnGame.get(19));
-		this.grid[1][6].setPawn(pawnGame.get(20));
-		this.grid[1][4].setPawn(pawnGame.get(21));
-		this.grid[3][2].setPawn(pawnGame.get(22));
-		this.grid[0][10].setPawn(pawnGame.get(23));
-
-		// ZEN PAWN
-		this.grid[5][5].setPawn(pawnGame.get(24));
-
+	public void displayTheGrid(){
+		this.gameMenu.gamePage();
 	}
-
 
 
 	/**
@@ -149,5 +114,13 @@ public class GameManager {
 	public boolean haveWin() {
 		// TODO - implement GameManager.haveWin
 		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * Get the grid
+	 * @return The grid composed of square
+	 */
+	public Square[][] getGrid() {
+		return grid;
 	}
 }

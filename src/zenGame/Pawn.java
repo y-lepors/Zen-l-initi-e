@@ -18,7 +18,7 @@ public class Pawn {
 	 * @param type The pawn color
 	 */
 	public Pawn(int x, int y, Type type) {
-		if(x < GameManager.width && x >= 0 && y < GameManager.height && y >= 0 && type != null){
+		if(x < ZenGame.width && x >= 0 && y < ZenGame.height && y >= 0 && type != null){
 			this.xOrigin = x;
 			this.yOrigin = y;
 			this.type = type;

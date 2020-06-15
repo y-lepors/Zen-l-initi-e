@@ -26,7 +26,12 @@ public class GraphicGameMenu implements IGameMenu {
     }
 
     @Override
-    public void GamePage() {
+    public void gamePage() {
+
+    }
+
+    @Override
+    public void rulesPage() {
 
     }
 }

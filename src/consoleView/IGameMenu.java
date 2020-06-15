@@ -6,5 +6,6 @@ public interface IGameMenu {
     public void printFirstPage();
     public Mode initializeMode();
     public void printSecondPage();
-    public void GamePage();
+    public void gamePage();
+    public void rulesPage();
 }

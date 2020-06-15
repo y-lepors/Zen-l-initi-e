@@ -10,6 +10,7 @@ public class Square {
 	private int x;
 	private int y;
 	private Pawn pawn;
+	private char charType;
 
 	/**
 	 * Initialize the square
@@ -17,10 +18,11 @@ public class Square {
 	 * @param y The y coordinate
 	 */
 	public Square(int x, int y) {
-		if(x < GameManager.width && x >= 0 && y < GameManager.height && y >= 0){
+		if(x < ZenGame.width && x >= 0 && y < ZenGame.height && y >= 0){
 			this.x = x;
 			this.y = y;
-			pawn = null;
+			this.pawn = null;
+			this.charType = '.';
 		}
 	}
 
@@ -30,6 +32,15 @@ public class Square {
 	 */
 	public void setPawn(Pawn pawn) {
 		this.pawn = pawn;
+		if(this.pawn.getType().equals(Type.ZEN)){
+			this.charType = 'Z';
+		} else if(this.pawn.getType().equals(Type.BLACK)){
+			this.charType = 'N';
+		} else if(this.pawn.getType().equals(Type.WHITE)){
+			this.charType = 'B';
+		} else if(this.pawn.getType().equals(null)) {
+			this.charType = '.';
+		}
 	}
 
 	/**
@@ -42,5 +53,21 @@ public class Square {
 			ret = true;
 		}
 		return ret;
+	}
+
+	/**
+	 * Get char type
+	 * @return The char
+	 */
+	public char getCharType() {
+		return charType;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
 	}
 }

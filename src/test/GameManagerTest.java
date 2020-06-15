@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import zenGame.Mode;
 import zenGame.Pawn;
+import zenGame.Square;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class GameManagerTest {
     GameManager g;
     @Before
     public void setUp() throws Exception {
-        g = new GameManager(new ArrayList<Pawn>(), "Yanis", "Enzo", Mode.HumainHumain);
+        g = new GameManager(new ArrayList<Pawn>(), "Yanis", "Enzo", Mode.HumainHumain, null);
     }
 
     @After
