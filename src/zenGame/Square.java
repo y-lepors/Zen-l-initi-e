@@ -78,4 +78,12 @@ public class Square {
 	public int getY() {
 		return y;
 	}
+
+	/**
+	 * Get the pawn
+	 * @return The pawn
+	 */
+	public Pawn getPawn() {
+		return pawn;
+	}
 }

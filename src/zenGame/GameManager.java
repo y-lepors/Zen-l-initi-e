@@ -46,6 +46,7 @@ public class GameManager {
 			}
 			this.current = firstPlayer;
 		}
+		this.displayTheGrid();
 	}
 
 	/**
@@ -130,6 +131,10 @@ public class GameManager {
 		if(posX < 10 && posY < 10 && posX > 0 && posY > 0){
 			if(this.grid[posX + 1][posY + 1].isFree()){
 				ret.add((posX+1) + "," + (posY+1));
+			} else if(this.grid[posX + 1][posY + 1].getPawn().equals(Type.BLACK)){
+				ret.add((posX+1) + "," + (posY+1));
+			} else if(this.grid[posX + 1][posY + 1].getPawn().equals(Type.WHITE)){
+
 			}
 			if (this.grid[posX + 1][posY].isFree()){
 				ret.add((posX +1)+ ","+posY);
@@ -271,6 +276,79 @@ public class GameManager {
 			}
 			if(this.grid[posX][posY - 1].isFree()){
 				ret.add((posX)+","+(posY - 1));
+			}
+		}
+
+		return ret;
+	}
+
+	/**
+	 * Calculated how many pawn are on the line choose
+	 * @param x The x coordinate
+	 * @param y The y coordinate
+	 * @return The number of pawn on this line
+	 */
+	public ArrayList<String> howManyPawnOnTheLine(int x, int y){
+		ArrayList<String> ret = new ArrayList<String>();
+
+
+
+
+
+
+		return ret;
+	}
+
+	/**
+	 * Count the number of pawn from the left to right diagonal
+	 * @param x The x coordinate
+	 * @param y The y coordinate
+	 * @return The number of pawn on this diagonal
+	 */
+	private int countPawnRightDiagonal(int x, int y){
+		int ret = 0;
+
+		for(int i = 0 ; i < 11 ; i++){
+			if(x+i < 11 && y+i < 11){
+				if(!this.grid[x+i][y+i].isFree()){
+					ret++;
+				}
+			}
+		}
+
+		for(int i = 10 ; i >= 0 ; i--){
+			if(x-i >= 0 && y-i >=0){
+				if(!this.grid[x-i][y-i].isFree()){
+					ret++;
+				}
+			}
+		}
+
+		return ret;
+	}
+
+	/***
+	 * Count the number of pawn from the right to left diagonal
+	 * @param x The x coordinate
+	 * @param y The y coordinate
+	 * @return The number of pawn on this diagonal
+	 */
+	private int countPawnLeftDiagonal(int x, int y){
+		int ret = 0;
+
+		for(int i = 0 ; i < 11 ; i++){
+			if(x+i < 11 && y-i < 11){
+				if(!this.grid[x+i][y-i].isFree()){
+					ret++;
+				}
+			}
+		}
+
+		for(int i = 10 ; i >= 0 ; i--){
+			if(x-i >= 0 && y+i >=0){
+				if(!this.grid[x-i][y+i].isFree()){
+					ret++;
+				}
 			}
 		}
 
