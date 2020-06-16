@@ -10,6 +10,7 @@ import java.util.*;
 public abstract class Player {
 
 	ArrayList<Pawn> myPawn;
+	private Type myColor;
 	protected String name;
 
 
@@ -26,11 +27,13 @@ public abstract class Player {
 				if(playerNumber == 0){
 					if(p.getType().equals(Type.WHITE)){
 						this.myPawn.add(p);
+						this.myColor = Type.WHITE;
 					}
 				} else if(playerNumber == 1){
 					for (Pawn p2 : pawnGame){
 						if(p2.getType().equals(Type.BLACK)){
 							this.myPawn.add(p2);
+							this.myColor = Type.BLACK;
 						}
 					}
 				}

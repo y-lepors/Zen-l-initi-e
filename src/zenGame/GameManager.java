@@ -123,10 +123,156 @@ public class GameManager {
 	 * Verif every possible move and return an ArrayList with every move
 	 * @param posX The posX
 	 * @param posY The posY
-	 * @return A arrayList of every possible move
+	 * @return An arrayList of every possible move
 	 */
-	public ArrayList<String> whichMove(int posX, int posY){
-		ArrayList<String> ret = new ArrayList<String>();
+	public int[][] whichMove(int posX, int posY){
+		int[][] ret = new int[8][2];
+		Type colorPawn = this.grid[posX][posY].getPawn().getType();
+
+		int horizontalMove = this.countPawnHorizontal(posX, posY);
+		int verticalMove = this.countPawnVertical(posX, posY);
+		int diagonalRightMove = this.countPawnRightDiagonal(posX, posY);
+		int diagonalLeftMove = this.countPawnLeftDiagonal(posX, posY);
+
+		// 8 different possibilities
+
+		// UP
+		if(upVerticalIsNotBlocked(posX, posY,verticalMove)){
+			ret[0][0] = posX;
+			ret[0][1] = posY+verticalMove;
+		}
+
+		// UP RIGHT DIAGONAL
+		if(upRightIsNotBlocked(posX, posY, diagonalRightMove)){
+			ret[1][0] = posX+diagonalRightMove;
+			ret[1][1] = posY+diagonalRightMove;
+		}
+
+		// UP LEFT DIAGONAL
+
+		// LEFT
+
+		// RIGHT
+
+		// DOWN
+		if(downVerticalIsNotBlocked(posX, posY,verticalMove)){
+			ret[5][0] = posX;
+			ret[5][1] = posY-verticalMove;
+		}
+
+		// DOWN RIGHT DIAGONAL
+		if(downRightIsNotBlocked(posX, posY, diagonalRightMove)){
+			ret[6][0] = posX-diagonalRightMove;
+			ret[6][1] = posY-diagonalRightMove;
+		}
+		// DOWN LEFT DIAGONAL
+
+		return ret;
+	}
+
+	/**
+	 * Return true if the vertical up is blocked by a pawn
+	 * @param posX The x coordinate
+	 * @param posY The y coordinate
+	 * @param verticalMove The number of possible move
+	 * @return true if the move is possible
+	 */
+	public boolean upVerticalIsNotBlocked(int posX, int posY, int verticalMove){
+		boolean ret = false;
+		Type otherType = this.otherType(posX, posY);
+		if((posX) < 11 && (posY+verticalMove) < 11 ){
+			if(this.grid[posX][posY+verticalMove].isFree() || this.grid[posX][posY+verticalMove].getPawn().getType().equals(otherType)){
+				for(int i = 1 ; i < verticalMove ; i++){
+					if(this.grid[posX][posY+i].getPawn().getType().equals(otherType)){
+						ret = false;
+						break;
+					} else {
+						ret = true;
+					}
+				}
+			}
+		}
+		return ret;
+	}
+
+	/**
+	 * Return true if the vertical down is blocked by a pawn
+	 * @param posX The x coordinate
+	 * @param posY The y coordinate
+	 * @param verticalMove The number of possible move
+	 * @return true if the move is possible
+	 */
+	public boolean downVerticalIsNotBlocked(int posX, int posY, int verticalMove){
+		boolean ret = false;
+		Type otherType = this.otherType(posX, posY);
+		if((posX) < 11 && (posY-verticalMove) < 11 ){
+			if(this.grid[posX][posY-verticalMove].isFree() || this.grid[posX][posY-verticalMove].getPawn().getType().equals(otherType)){
+				for(int i = 1 ; i < verticalMove ; i++){
+					if(this.grid[posX][posY-i].getPawn().getType().equals(otherType)){
+						ret = false;
+						break;
+					} else {
+						ret = true;
+					}
+				}
+			}
+		}
+		return ret;
+	}
+
+	public boolean upRightIsNotBlocked(int posX, int posY, int diagonalRightMove){
+		boolean ret = false;
+		Type otherType = this.otherType(posX, posY);
+		if((posX+diagonalRightMove) < 11 && (posY+diagonalRightMove) < 11 ){
+			if(this.grid[posX+diagonalRightMove][posY+diagonalRightMove].isFree() || this.grid[posX+diagonalRightMove][posY+diagonalRightMove].getPawn().getType().equals(otherType)){
+				for(int i = 1 ; i < diagonalRightMove ; i++){
+					if(this.grid[posX+i][posY+i].getPawn().getType().equals(otherType)){
+						ret = false;
+						break;
+					} else {
+						ret = true;
+					}
+				}
+			}
+		}
+		return ret;
+	}
+
+	public boolean downRightIsNotBlocked(int posX, int posY, int diagonalRightMove){
+		boolean ret = false;
+		Type otherType = this.otherType(posX, posY);
+		if((posX-diagonalRightMove) < 11 && (posY-diagonalRightMove) < 11 ){
+			if(this.grid[posX-diagonalRightMove][posY-diagonalRightMove].isFree() || this.grid[posX-diagonalRightMove][posY-diagonalRightMove].getPawn().getType().equals(otherType)){
+				for(int i = 1 ; i < diagonalRightMove ; i++){
+					if(this.grid[posX-i][posY-i].getPawn().getType().equals(otherType)){
+						ret = false;
+						break;
+					} else {
+						ret = true;
+					}
+				}
+			}
+		}
+		return ret;
+	}
+
+
+	/**
+	 * The averse type
+	 * @param posX The x coordinate
+	 * @param posY The y coordinate
+	 * @return The averse type
+	 */
+	private Type otherType(int posX, int posY){
+		Type ret = this.grid[posX][posY].getPawn().getType();
+		if(ret.equals(Type.BLACK)){
+			ret = Type.WHITE;
+		} else if(ret.equals(Type.WHITE)){
+			ret = Type.BLACK;
+		} else if(ret.equals(Type.ZEN)){
+			ret = this.current.myPawn.get(0).getType();
+		}
+
 		return ret;
 	}
 
@@ -151,7 +297,6 @@ public class GameManager {
 				}
 			}
 		}
-
 		return ret;
 	}
 
@@ -176,8 +321,6 @@ public class GameManager {
 				}
 			}
 		}
-
-
 		return ret;
 	}
 
@@ -202,7 +345,6 @@ public class GameManager {
 				}
 			}
 		}
-
 		return ret;
 	}
 
@@ -227,7 +369,6 @@ public class GameManager {
 				}
 			}
 		}
-		
 		return ret;
 	}
 }
