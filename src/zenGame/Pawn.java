@@ -66,4 +66,20 @@ public class Pawn {
 	public int getyOrigin() {
 		return yOrigin;
 	}
+
+	/**
+	 * Set the x origin
+	 * @param xOrigin The x coordinate
+	 */
+	public void setxOrigin(int xOrigin) {
+		this.xOrigin = xOrigin;
+	}
+
+	/**
+	 * Set the y origin
+	 * @param yOrigin The y coordinate
+	 */
+	public void setyOrigin(int yOrigin) {
+		this.yOrigin = yOrigin;
+	}
 }

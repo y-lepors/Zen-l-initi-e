@@ -55,6 +55,11 @@ public class Square {
 		return ret;
 	}
 
+	public void setToNull(){
+		this.pawn = null;
+		this.charType = '.';
+	}
+
 	/**
 	 * Get char type
 	 * @return The char

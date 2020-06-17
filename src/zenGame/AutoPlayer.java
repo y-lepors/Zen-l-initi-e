@@ -22,10 +22,12 @@ public class AutoPlayer extends Player {
 	 * This class records the movement of the auto player
 	 * @return An int tab with int [0] = x and int [1] = y
 	 */
-	public int[] newMove() {
-		// TODO - implement AutoPlayer.newMove
-		throw new UnsupportedOperationException();
+	@Override
+	public int[] newMove(Square[][] grid) {
+		return new int[0];
 	}
+
+
 
 	/**
 	 * Check if the move is true

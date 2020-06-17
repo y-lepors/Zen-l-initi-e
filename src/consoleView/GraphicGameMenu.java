@@ -2,6 +2,7 @@ package consoleView;
 
 import zenGame.GraphicType;
 import zenGame.Mode;
+import zenGame.Square;
 
 public class GraphicGameMenu implements IGameMenu {
 
@@ -26,9 +27,10 @@ public class GraphicGameMenu implements IGameMenu {
     }
 
     @Override
-    public void gamePage() {
+    public void gamePage(Square[][] grid) {
 
     }
+
 
     @Override
     public void rulesPage() {

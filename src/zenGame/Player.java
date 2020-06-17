@@ -44,7 +44,7 @@ public abstract class Player {
     /**
 	 * {abstract}
 	 */
-	public abstract int[] newMove();
+	public abstract int[] newMove(Square[][] grid);
 
 	/**
 	 * Check the move
@@ -55,5 +55,11 @@ public abstract class Player {
 		throw new UnsupportedOperationException();
 	}
 
-
+	/**
+	 * Get the player's color
+	 * @return The player's color
+	 */
+	public Type getMyColor() {
+		return myColor;
+	}
 }

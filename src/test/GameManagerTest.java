@@ -16,7 +16,7 @@ public class GameManagerTest {
     GameManager g;
     @Before
     public void setUp() throws Exception {
-        g = new GameManager(new ArrayList<Pawn>(), "Yanis", "Enzo", Mode.HumainHumain, null, null);
+        g = new GameManager(new ArrayList<Pawn>(), "Yanis", "Enzo", null, null);
     }
 
     @After

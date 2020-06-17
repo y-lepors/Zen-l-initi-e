@@ -157,7 +157,6 @@ public class PrintGameMenu implements IGameMenu{
 			if(str.equals("1") || str.equals("NOUVELLE PARTIE")){
 				System.out.println("Vous avez choisi \"NOUVELLE PARTIE\"");
 				loop = true;
-				this.initializeMode();
 			} else if(str.equals("2") || str.equals("CHARGER")){
 				System.out.println("Vous avez choisi \"CHARGER\" ");
 				loop = true;
@@ -176,7 +175,8 @@ public class PrintGameMenu implements IGameMenu{
 	 * Display the grid page
 	 */
 	@Override
-	public void gamePage() {
+	public void gamePage(Square[][] grid) {
+		this.grid = grid;
 		for(int i = 0; i < 50 ; i++){
 			System.out.println();
 		}
@@ -184,7 +184,7 @@ public class PrintGameMenu implements IGameMenu{
 		System.out.println(
 				"\n" +
 				"\n" +
-				"       A       B       C       D       E       F       G       H       I       J       K\n" +
+				"       0       1       2       3       4       5       6       7       8       9       10\n" +
 				"	+-------------------------------------------------------------------------------------+");
 		for(int i = 10; i >= 0 ; i--){
 			for(int j = 0; j < this.nbY ; j++){
@@ -194,7 +194,7 @@ public class PrintGameMenu implements IGameMenu{
 			System.out.println("                                                                                         |");
 		}
 		System.out.println("	+-------------------------------------------------------------------------------------+");
-		System.out.println("       A       B       C       D       E       F       G       H       I       J       K");
+		System.out.println("       0       1       2       3       4       5       6       7       8       9       10");
 	}
 
 	/**
