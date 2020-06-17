@@ -20,6 +20,7 @@ public class GameManager {
 	public int playerNumber = 0;
 	private Mode mode;
 	private IGameMenu gameMenu;
+	ArrayList<Pawn> pawnList = new ArrayList<Pawn>();
 
 
 	/**
@@ -65,14 +66,16 @@ public class GameManager {
 		while(!loop) {
 			this.changeCurrent();
 			this.displayTheGrid();
-			loop = haveWin(this.doMove(this.current.newMove(this.grid)));
+			this.pawnList = new ArrayList<>();
+			loop = haveWin(this.doMove(this.current.newMove(this.grid)), this.grid);
 			if(loop){
 				System.out.println("Le gagnant est "+this.current.name);
 				break;
 			}
 			this.changeCurrent();
 			this.displayTheGrid();
-			loop = haveWin(this.doMove(this.current.newMove(this.grid)));
+			this.pawnList = new ArrayList<>();
+			loop = haveWin(this.doMove(this.current.newMove(this.grid)), this.grid);
 			if(loop){
 				System.out.println("Le gagnant est "+this.current.name);
 				break;
@@ -136,90 +139,86 @@ public class GameManager {
 	 * Test if the player have win
 	 * @return true if the player have win
 	 */
-	public boolean haveWin(Pawn pawnInspected) {
-		Square[][] grid = this.grid.clone();
+	public boolean haveWin(Pawn pawnInspected, Square[][] gridToClone) {
+		Square[][] grid = gridToClone.clone();
 		boolean ret = false;
+		this.pawnList.add(grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin()].getPawn());
 
 		if(pawnInspected.getxOrigin() < 10 && pawnInspected.getyOrigin() < 10) {
 			if (!grid[pawnInspected.getxOrigin() + 1][pawnInspected.getyOrigin() + 1].isFree()) {
 				if (grid[pawnInspected.getxOrigin() + 1][pawnInspected.getyOrigin() + 1].getPawn().getType().equals(pawnInspected.getType())) {
 					ret = true;
-					grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin()].setToNull();
-					haveWin(grid[pawnInspected.getxOrigin() + 1][pawnInspected.getyOrigin() + 1].getPawn());
+					haveWin(grid[pawnInspected.getxOrigin() + 1][pawnInspected.getyOrigin() + 1].getPawn(), grid);
 				}
 			}
-		}
-
-		if(pawnInspected.getyOrigin() < 10) {
+		} else if(pawnInspected.getyOrigin() < 10) {
 			if (!grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin() + 1].isFree()) {
 				if (grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin() + 1].getPawn().getType().equals(pawnInspected.getType())) {
 					ret = true;
-					grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin()].setToNull();
-					haveWin(grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin() + 1].getPawn());
+					haveWin(grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin() + 1].getPawn(), grid);
+
+
 				}
 			}
-		}
-
-		if(pawnInspected.getxOrigin() > 0 && pawnInspected.getyOrigin() < 10) {
+		} else if(pawnInspected.getxOrigin() > 0 && pawnInspected.getyOrigin() < 10) {
 			if (!grid[pawnInspected.getxOrigin() - 1][pawnInspected.getyOrigin() + 1].isFree()) {
 				if (grid[pawnInspected.getxOrigin() - 1][pawnInspected.getyOrigin() + 1].getPawn().getType().equals(pawnInspected.getType())) {
 					ret = true;
-					grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin()].setToNull();
-					haveWin(grid[pawnInspected.getxOrigin() - 1][pawnInspected.getyOrigin() + 1].getPawn());
+					haveWin(grid[pawnInspected.getxOrigin() - 1][pawnInspected.getyOrigin() + 1].getPawn(), grid);;
 				}
 			}
-		}
-
-		if(pawnInspected.getxOrigin() > 0) {
+		} else if(pawnInspected.getxOrigin() > 0) {
 			if (!grid[pawnInspected.getxOrigin() - 1][pawnInspected.getyOrigin()].isFree()) {
 				if (grid[pawnInspected.getxOrigin() - 1][pawnInspected.getyOrigin()].getPawn().getType().equals(pawnInspected.getType())) {
 					ret = true;
-					grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin()].setToNull();
-					haveWin(grid[pawnInspected.getxOrigin() - 1][pawnInspected.getyOrigin()].getPawn());
+					haveWin(grid[pawnInspected.getxOrigin() - 1][pawnInspected.getyOrigin()].getPawn(), grid);;
 				}
 			}
-		}
-
-		if(pawnInspected.getxOrigin() < 10) {
+		} else if(pawnInspected.getxOrigin() < 10) {
 			if (!grid[pawnInspected.getxOrigin() + 1][pawnInspected.getyOrigin()].isFree()) {
 				if (grid[pawnInspected.getxOrigin() + 1][pawnInspected.getyOrigin()].getPawn().getType().equals(pawnInspected.getType())) {
 					ret = true;
-					grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin()].setToNull();
-					haveWin(grid[pawnInspected.getxOrigin() + 1][pawnInspected.getyOrigin()].getPawn());
+					haveWin(grid[pawnInspected.getxOrigin() + 1][pawnInspected.getyOrigin()].getPawn(), grid);;
+
 				}
 			}
-		}
-
-		if(pawnInspected.getxOrigin() > 0 && pawnInspected.getyOrigin() > 0) {
+		} else if(pawnInspected.getxOrigin() > 0 && pawnInspected.getyOrigin() > 0) {
 			if (!grid[pawnInspected.getxOrigin() - 1][pawnInspected.getyOrigin() - 1].isFree()) {
 				if (grid[pawnInspected.getxOrigin() - 1][pawnInspected.getyOrigin() - 1].getPawn().getType().equals(pawnInspected.getType())) {
 					ret = true;
-					grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin()].setToNull();
-					haveWin(grid[pawnInspected.getxOrigin() - 1][pawnInspected.getyOrigin() - 1].getPawn());
+					haveWin(grid[pawnInspected.getxOrigin() - 1][pawnInspected.getyOrigin() - 1].getPawn(), grid);;
 				}
 			}
-		}
-
-		if(pawnInspected.getyOrigin() > 0) {
+		} else if(pawnInspected.getyOrigin() > 0) {
 			if (!grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin() - 1].isFree()) {
 				if (grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin() - 1].getPawn().getType().equals(pawnInspected.getType())) {
 					ret = true;
-					grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin()].setToNull();
-					haveWin(grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin() - 1].getPawn());
+					haveWin(grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin() - 1].getPawn(), grid);;
+
 				}
 			}
-		}
-
-		if(pawnInspected.getxOrigin() < 10 && pawnInspected.getyOrigin() > 0) {
+		} else if(pawnInspected.getxOrigin() < 10 && pawnInspected.getyOrigin() > 0) {
 			if (!grid[pawnInspected.getxOrigin() + 1][pawnInspected.getyOrigin() - 1].isFree()) {
 				if (grid[pawnInspected.getxOrigin() + 1][pawnInspected.getyOrigin() - 1].getPawn().getType().equals(pawnInspected.getType())) {
 					ret = true;
-					grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin()].setToNull();
-					haveWin(grid[pawnInspected.getxOrigin() - 1][pawnInspected.getyOrigin() + 1].getPawn());
+					haveWin(grid[pawnInspected.getxOrigin() - 1][pawnInspected.getyOrigin() + 1].getPawn(), grid);;
 				}
 			}
+		} else {
+			grid[pawnInspected.getxOrigin()][pawnInspected.getyOrigin()].setToNull();
 		}
-		return ret;
+
+		boolean theRet = false;
+		for(Pawn p : this.current.myPawn){
+			if(this.pawnList.contains(p)){
+				theRet = true;
+			} else {
+				theRet = false;
+				break;
+			}
+		}
+
+		return theRet;
 	}
 
 	/**
