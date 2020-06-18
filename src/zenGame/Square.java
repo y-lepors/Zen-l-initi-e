@@ -1,11 +1,13 @@
 package zenGame;
 
+import java.io.Serializable;
+
 /**
  * This class is used to create the square
  * @author LePors
  * @version 1.0
  */
-public class Square {
+public class Square implements Serializable {
 
 	private int x;
 	private int y;

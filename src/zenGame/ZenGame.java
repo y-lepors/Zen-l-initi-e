@@ -5,6 +5,7 @@ import consoleView.IGameMenu;
 import consoleView.PrintGameMenu;
 
 import javax.swing.*;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -12,7 +13,7 @@ import java.util.*;
  * @author LePors
  * @version 1.0
  */
-public class ZenGame {
+public class ZenGame implements Serializable {
 
 	private GameManager gamePlay;
 	private ArrayList<Pawn> pawnGame;
@@ -69,7 +70,6 @@ public class ZenGame {
 		} else {
 			this.gameType = GraphicType.Graphic;
 		}
-		System.out.println(gameType);
 	}
 
 	/**

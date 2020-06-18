@@ -1,11 +1,13 @@
 package zenGame;
 
+import java.io.Serializable;
+
 /**
  * This class is used to create a Pawn
  * @author LePors
  * @version 1.0
  */
-public class Pawn {
+public class Pawn implements Serializable {
 	private Type type;
 	private int xOrigin;
 	private int yOrigin;

@@ -11,6 +11,4 @@ public interface IGameManager {
 
 	void endOfGame();
 
-	String description();
-
 }

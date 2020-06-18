@@ -1,5 +1,6 @@
 package zenGame;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -7,7 +8,7 @@ import java.util.*;
  * @author LePors
  * @version 1.0
  */
-public abstract class Player {
+public abstract class Player implements Serializable {
 
 	ArrayList<Pawn> myPawn;
 	private Type myColor;
@@ -25,13 +26,13 @@ public abstract class Player {
 			this.myPawn = new ArrayList<Pawn>();
 			for (Pawn p : pawnGame){
 				if(playerNumber == 0){
-					if(p.getType().equals(Type.WHITE)){
+					if(p.getType().equals(Type.WHITE) || p.getType().equals(Type.ZEN)){
 						this.myPawn.add(p);
 						this.myColor = Type.WHITE;
 					}
 				} else if(playerNumber == 1){
 					for (Pawn p2 : pawnGame){
-						if(p2.getType().equals(Type.BLACK)){
+						if(p2.getType().equals(Type.BLACK) || p.getType().equals(Type.ZEN)){
 							this.myPawn.add(p2);
 							this.myColor = Type.BLACK;
 						}
@@ -61,5 +62,13 @@ public abstract class Player {
 	 */
 	public Type getMyColor() {
 		return myColor;
+	}
+
+	/**
+	 * Eliminate a pawn in current pawn list
+	 * @param pawn The pawn to eliminate from list
+	 */
+	public void eliminateAPawn(Pawn pawn){
+		this.myPawn.remove(pawn);
 	}
 }

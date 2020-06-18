@@ -13,4 +13,5 @@ public interface IGameMenu {
     public void gamePage(Square[][] grid);
     public void rulesPage();
     public void loadPage();
+    public void endGamePage();
 }
