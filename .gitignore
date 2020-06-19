@@ -1,5 +1,9 @@
 # IDE
 .idea
+<<<<<<< HEAD
+=======
+Projet Zen l'Initiée.iml
+>>>>>>> 71998f858378e11d77a3ff1fffbb12013e6077e2
 
 # Compiled class file
 *.class
@@ -23,4 +27,8 @@
 *.rar
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+<<<<<<< HEAD
 hs_err_pid*
+=======
+hs_err_pid*
+>>>>>>> 71998f858378e11d77a3ff1fffbb12013e6077e2
