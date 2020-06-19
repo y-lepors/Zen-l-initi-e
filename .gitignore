@@ -4,6 +4,9 @@
 =======
 Projet Zen l'Initiée.iml
 >>>>>>> 71998f858378e11d77a3ff1fffbb12013e6077e2
+# Default ignored files
+/.idea/*
+/Projet Zen l'Initiée.iml
 
 # Compiled class file
 *.class
