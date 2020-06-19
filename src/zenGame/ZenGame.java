@@ -5,6 +5,8 @@ import consoleView.IGameMenu;
 import consoleView.PrintGameMenu;
 
 import javax.swing.*;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.*;
 
@@ -42,10 +44,9 @@ public class ZenGame implements Serializable {
 			if(this.gameType.equals(GraphicType.Console)){
 				this.gameMenu = new PrintGameMenu(this.grid);
 			} else if(this.gameType.equals(GraphicType.Graphic)){
-				this.gameMenu = new GraphicGameMenu();
-				GraphicGameMenu graphicGameMenu = new GraphicGameMenu();
+				this.gameMenu = new GraphicGameMenu(this.grid);
 			}
-			gamePlay = new GameManager(this.pawnGame, this.playerName, this.playerName2, this.gameMenu, this.grid);
+			this.gamePlay = new GameManager(this.pawnGame, this.playerName, this.playerName2, this.gameMenu, this.grid);
 		} else {
 			System.err.println("Name must be initialized");
 		}
@@ -151,5 +152,20 @@ public class ZenGame implements Serializable {
 		// ZEN PAWN
 		this.grid[5][5].setPawn(pawnGame.get(24));
 
+	}
+
+	/**
+	 * Save the game
+	 * @param fileName The path to save
+	 */
+	public void gameSave(String fileName) {
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("./data/"+fileName+".bin"));
+			out.writeObject(this);
+			out.close();
+			System.out.println("Serialization done");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

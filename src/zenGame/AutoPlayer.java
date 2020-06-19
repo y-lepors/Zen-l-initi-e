@@ -47,7 +47,13 @@ public class AutoPlayer extends Player {
 		ret[2] = possibleMove.get(randomChoice)[0];
 		ret[3] = possibleMove.get(randomChoice)[1];
 
-		System.out.println("Le bot déplace le pion en : y = "+ret[2]+" et x = "+ret[3]);
+		System.out.println("Le bot déplace le pion en : y = "+ret[2]+" et x = "+ret[3]
+		+" \n A vous dans 2 secondes !");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return ret;
 	}
 

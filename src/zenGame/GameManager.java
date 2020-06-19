@@ -135,22 +135,6 @@ public class GameManager implements Serializable {
 		}
 	}
 
-	/**
-	 * Save the game
-	 * @param fileName The path to save
-	 */
-	public void gameSave(String fileName) {
-		try {
-			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("./data/"+fileName));
-			out.writeObject(this);
-			out.close();
-			System.out.println("Serialization done");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-
 
 	/**
 	 * Get the grid
@@ -189,7 +173,6 @@ public class GameManager implements Serializable {
 			for(Pawn p : this.pawnList){
 				if(listCase[i][0] == p.getxOrigin() && listCase[i][1] == p.getyOrigin()){
 					if(!this.winnerList.contains(p)){
-						System.out.println(listCase[i][0] + ":" + listCase[i][1]);
 						this.winnerList.add(p);
 						haveWin(p.getxOrigin(), p.getyOrigin());
 					}

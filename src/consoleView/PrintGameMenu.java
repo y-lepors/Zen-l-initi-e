@@ -204,6 +204,39 @@ public class PrintGameMenu implements IGameMenu {
 	@Override
 	public void rulesPage() {
 		System.out.println("LES REGLES :");
+		System.out.println("But du jeu : le vainqueur est le premier joueur qui réussit à former une chaîne continue avec la totalité de " +
+				"\nses pions se trouvant encore sur le plateau, y compris le \"Z\", si celui-ci est encore en jeu.\n" +
+				"Début de partie : chaque joueur choisit une couleur.\n" +
+				"Les pions sont disposés sur le plateau selon une figure imposée.\n" +
+				"Déroulement de la partie : chaque joueur déplace à son tour un pion de sa couleur ou le \"Z\" en respectant 4 règles très simples.\n" +
+				"Règle n°1 : les pions se déplacent en ligne droite dans n'importe quelle direction. " +
+				"\nTout pion doit toujours se déplacer d'autant de cases qu'il y a de pions sur la ligne de déplacement choisie (horizontale ou verticale ou diagonale)." +
+				"\nTous les pions sont pris en compte y compris le pion déplacé.\n" +
+				"Règle n°2 : tout pion peut passer par-dessus un ou plusieurs pions de sa couleur, mais jamais par-dessus ceux de son adversaire.\n" +
+				"Règle n°3 : tout pion peut capturer un pion adverse en se plaçant sur la case occupée par le pion pris en respectant la règle n°1. " +
+				"\nCelui-ci est alors définitivement retiré du jeu.\n" +
+				"Règle n°4 : à chaque coup, le \"Z\" pion commun à tous les joueurs peut être soit blanc soit noir selon l'intérêt de celui qui joue.\n" +
+				"Il se déplace comme les autres pions, mais peut aussi être pris.\n" +
+				"Pour 4 joueurs (2 par équipe) : deux joueurs d'une même équipe jouent avec les 12 pions noirs, et les deux autres avec les 12 pions blancs.\n" +
+				"La partie se déroule comme précédemment.");
+		System.out.println("\n" +
+				"\n" +
+				"1 : RETOUR\n" +
+				"VOTRE CHOIX : ");
+
+		boolean loop = false;
+		while (!loop) {
+			Scanner sc = new Scanner(System.in);
+			String str = sc.nextLine();
+
+			if (str.equals("1") || str.equals("RETOUR")) {
+				System.out.println("Vous avez choisi \"RETOUR\"");
+				this.printFirstPage();
+				loop = true;
+			} else {
+				System.err.println("Mauvaise valeur recommencez :");
+			}
+		}
 	}
 
 	/**
