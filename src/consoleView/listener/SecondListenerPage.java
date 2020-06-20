@@ -1,7 +1,7 @@
 package consoleView.listener;
 
 import consoleView.frame.FirstFramePage;
-import consoleView.frame.RulesFrame;
+import consoleView.frame.ModePage;
 import consoleView.frame.SecondFramePage;
 
 import java.awt.event.ActionEvent;
@@ -13,7 +13,7 @@ public class SecondListenerPage implements ActionListener {
 
     FirstFramePage m;
     SecondFramePage s;
-    RulesFrame r;
+    ModePage modePage;
 
     public SecondListenerPage(SecondFramePage s){
         this.s = s;
@@ -25,10 +25,10 @@ public class SecondListenerPage implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == s.getNewGameButton()){
             s.dispose();
-            s = new SecondFramePage();
+            modePage = new ModePage();
+            ModeListenerPage modeListenerPage = new ModeListenerPage(modePage);
         } else if (e.getSource() == s.getLoadButton()){
-            m.setVisible(false);
-            r = new RulesFrame();
+            s.dispose();
         } else if (e.getSource() == s.getBackButton()){
             s.dispose();
             m = new FirstFramePage();

@@ -2,6 +2,7 @@ package zenGame;
 
 import consoleView.IGameMenu;
 import consoleView.PrintGameMenu;
+import consoleView.frame.GameFrame;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -34,12 +35,12 @@ public class GameManager implements Serializable {
 	 * @param playerName The first player name
 	 * @param playerName2 The second player name
 	 */
-	public GameManager(ArrayList<Pawn> pawnGame, String playerName, String playerName2, IGameMenu gameMenu, Square[][] grid) {
+	public GameManager(ArrayList<Pawn> pawnGame, String playerName, String playerName2, IGameMenu gameMenu, Square[][] grid, Mode mode) {
 		this.grid = grid;
 		this.gameMenu = gameMenu;
+		this.mode = mode;
 		if(pawnGame != null && playerName != null && playerName2 != null){
 			this.pawnGame = pawnGame;
-			this.mode = gameMenu.initializeMode();
 			if(this.mode == Mode.HumainHumain){
 				this.firstPlayer = new HumanPlayer(pawnGame, playerName, this.playerNumber);
 				this.playerNumber++;

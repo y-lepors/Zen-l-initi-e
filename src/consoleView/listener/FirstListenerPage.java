@@ -30,6 +30,7 @@ public class FirstListenerPage implements ActionListener {
         } else if (e.getSource() == m.getRulesButton()){
             m.dispose();
             r = new RulesFrame();
+            RulesListenerPage rulesListenerPage = new RulesListenerPage(r);
         } else if (e.getSource() == m.getExitButton()){
             exit(0);
         }

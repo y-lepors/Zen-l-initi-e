@@ -22,7 +22,6 @@ public class FirstFramePage extends JFrame {
         super("Zen L'Initiée");
         this.setSize(1200,800);
         this.setContentPane(new PanelFond());
-        ImageIcon playButtonImage = new ImageIcon("./data/playButton.png");
         this.setIconImage(GraphicGameMenu.image.getImage());
         this.setVisible(true);
         this.setLocationRelativeTo(null);

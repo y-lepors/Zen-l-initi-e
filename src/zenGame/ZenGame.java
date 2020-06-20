@@ -26,13 +26,14 @@ public class ZenGame implements Serializable {
 	protected Square[][] grid;
 	public final static int width = 11;
 	public final static int height = 11;
+	private Mode mode;
 
 	/**
 	 * Initialize the player name
 	 * @param playerName The first player name
 	 * @param playerName2 The second player name
 	 */
-	public ZenGame(String playerName, String playerName2) {
+	public ZenGame(String playerName, String playerName2, Mode mode, IGameMenu iGameMenu) {
 
 		if(playerName != null && playerName2 != null){
 			this.playerName = playerName;
@@ -40,13 +41,9 @@ public class ZenGame implements Serializable {
 			this.pawnGame = new ArrayList<Pawn>();
 			this.initializePawn();
 			this.initializeGrid();
-			this.askGameType();
-			if(this.gameType.equals(GraphicType.Console)){
-				this.gameMenu = new PrintGameMenu(this.grid);
-			} else if(this.gameType.equals(GraphicType.Graphic)){
-				this.gameMenu = new GraphicGameMenu(this.grid);
-			}
-			this.gamePlay = new GameManager(this.pawnGame, this.playerName, this.playerName2, this.gameMenu, this.grid);
+			this.mode = mode;
+			this.gameMenu = iGameMenu;
+			this.gamePlay = new GameManager(this.pawnGame, this.playerName, this.playerName2, this.gameMenu, this.grid, this.mode);
 		} else {
 			System.err.println("Name must be initialized");
 		}

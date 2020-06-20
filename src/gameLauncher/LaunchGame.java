@@ -1,8 +1,8 @@
 package gameLauncher;
 
+import zenGame.GraphicType;
+import zenGame.Mode;
 import zenGame.ZenGame;
-
-import java.util.ArrayList;
 
 /**
  * This class is used to launch the game
@@ -11,11 +11,13 @@ import java.util.ArrayList;
  */
 public class LaunchGame {
 
+	private GraphicType gameType;
+
 	/**
 	 * The entry points of the program
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ZenGame zenGame = new ZenGame("Yanis", "Enzo");
+		AskGameType askGameType = new AskGameType();
 	}
 }

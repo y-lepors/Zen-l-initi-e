@@ -3,6 +3,7 @@ package consoleView;
 import zenGame.GraphicType;
 import zenGame.Mode;
 import zenGame.Square;
+import zenGame.ZenGame;
 
 import java.util.Scanner;
 
@@ -24,11 +25,8 @@ public class PrintGameMenu implements IGameMenu {
 	/**
 	 * This method print the game menu
 	 */
-	public PrintGameMenu(Square[][] grid) {
+	public PrintGameMenu() {
 		this.printFirstPage();
-		this.grid = grid;
-		this.nbX = grid.length;
-		this.nbY = grid[0].length;
 	}
 
 	/**
@@ -112,10 +110,12 @@ public class PrintGameMenu implements IGameMenu {
 			if (str.equals("1") || str.equals("HumainHumain")) {
 				m = Mode.HumainHumain;
 				System.out.println("Vous avez choisi le mode humain vs humain");
+				ZenGame zenGame = new ZenGame("Yanis", "Enzo", Mode.HumainHumain, this);
 				loop = true;
 			} else if (str.equals("2") || str.equals("HumainRobot")) {
 				System.out.println("Vous avez choisi le mode humain vs robot");
 				m = Mode.HumainRobot;
+				ZenGame zenGame = new ZenGame("Yanis", "Enzo", Mode.HumainRobot, this);
 				loop = true;
 			} else {
 				System.err.println("Mauvaise valeur recommencez :");
@@ -156,6 +156,7 @@ public class PrintGameMenu implements IGameMenu {
 
 			if (str.equals("1") || str.equals("NOUVELLE PARTIE")) {
 				System.out.println("Vous avez choisi \"NOUVELLE PARTIE\"");
+				this.initializeMode();
 				loop = true;
 			} else if (str.equals("2") || str.equals("CHARGER")) {
 				System.out.println("Vous avez choisi \"CHARGER\" ");
@@ -188,7 +189,7 @@ public class PrintGameMenu implements IGameMenu {
 						"     +-------------------------------------------------------------------------------------+");
 		for (int i = 10; i >= 0; i--) {
 			System.out.print(i + " | ");
-			for (int j = 0; j < this.nbY; j++) {
+			for (int j = 0; j < 11; j++) {
 				System.out.print("       " + this.grid[i][j].getCharType());
 			}
 			System.out.println(" | " + i);

@@ -5,6 +5,8 @@ import zenGame.Square;
 
 /**
  * This interface define the game menu
+ * @author LePors
+ * @version 1.0
  */
 public interface IGameMenu {
     public void printFirstPage();

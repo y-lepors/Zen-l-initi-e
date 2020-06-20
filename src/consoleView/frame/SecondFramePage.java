@@ -23,7 +23,7 @@ public class SecondFramePage extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.newGameButton = new JButton("NOUVELLE PARTIE");
         this.loadButton = new JButton("CHARGER");
-        this.backButton = new JButton("RETOUR");
+        this.backButton = new JButton("RETOUR", new ImageIcon("./data/backButton.png"));
         this.add(this.newGameButton);
         this.add(this.loadButton);
         this.add(this.backButton);

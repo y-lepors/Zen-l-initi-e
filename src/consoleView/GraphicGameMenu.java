@@ -1,10 +1,12 @@
 package consoleView;
 
 import consoleView.frame.FirstFramePage;
+import consoleView.frame.GameFrame;
 import consoleView.frame.SecondFramePage;
 import consoleView.listener.FirstListenerPage;
 import zenGame.Mode;
 import zenGame.Square;
+import zenGame.ZenGame;
 
 import javax.swing.*;
 
@@ -14,10 +16,7 @@ public class GraphicGameMenu implements IGameMenu {
     private int nbX, nbY;
     public final static ImageIcon image = new ImageIcon("./data/logoVoid.png");
 
-    public GraphicGameMenu(Square[][] grid){
-        this.grid = grid;
-        this.nbX = grid.length;
-        this.nbY = grid[0].length;
+    public GraphicGameMenu(){
         this.printFirstPage();
     }
 
@@ -29,7 +28,6 @@ public class GraphicGameMenu implements IGameMenu {
 
     @Override
     public Mode initializeMode() {
-
         return Mode.HumainHumain;
     }
 
@@ -40,7 +38,7 @@ public class GraphicGameMenu implements IGameMenu {
 
     @Override
     public void gamePage(Square[][] grid) {
-
+        GameFrame gameFrame = new GameFrame(grid);
     }
 
 
