@@ -26,9 +26,9 @@ public class FirstFramePage extends JFrame {
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.playButton = new JButton("JOUER");
-        this.rulesButton = new JButton("REGLES");
-        this.exitButton = new JButton("QUITTER");
+        this.playButton = new JButton("JOUER", new ImageIcon("./data/playButton.png"));
+        this.rulesButton = new JButton("REGLES", new ImageIcon("./data/rulesButton.png"));
+        this.exitButton = new JButton("QUITTER", new ImageIcon("./data/exitButton.png"));
         this.add(playButton);
         this.add(rulesButton);
         this.add(exitButton);

@@ -27,6 +27,7 @@ public class GameManager implements Serializable {
 	ArrayList<Pawn> pawnList;
 	ArrayList<Pawn> pawnListWinner;
 	ArrayList<Pawn> winnerList;
+	private GraphicType gameType;
 
 
 	/**
@@ -35,10 +36,11 @@ public class GameManager implements Serializable {
 	 * @param playerName The first player name
 	 * @param playerName2 The second player name
 	 */
-	public GameManager(ArrayList<Pawn> pawnGame, String playerName, String playerName2, IGameMenu gameMenu, Square[][] grid, Mode mode) {
+	public GameManager(ArrayList<Pawn> pawnGame, String playerName, String playerName2, IGameMenu gameMenu, Square[][] grid, Mode mode, GraphicType gameType) {
 		this.grid = grid;
 		this.gameMenu = gameMenu;
 		this.mode = mode;
+		this.gameType = gameType;
 		if(pawnGame != null && playerName != null && playerName2 != null){
 			this.pawnGame = pawnGame;
 			if(this.mode == Mode.HumainHumain){
@@ -59,7 +61,11 @@ public class GameManager implements Serializable {
 	 * This method display the grid
 	 */
 	public void displayTheGrid(){
-		this.gameMenu.gamePage(this.grid);
+		if(this.gameType.equals(GraphicType.Console)) {
+			this.gameMenu.gamePage(this.grid);
+		} else if (this.gameType.equals(GraphicType.Graphic)){
+			//GameFrame gameFrame = new GameFrame(this.grid);
+		}
 	}
 
 
@@ -110,9 +116,12 @@ public class GameManager implements Serializable {
 				this.pawnGame.remove(this.grid[move[2]][move[3]].getPawn());
 				this.firstPlayer.myPawn.remove(this.grid[move[2]][move[3]].getPawn());
 				this.secondPlayer.myPawn.remove(this.grid[move[2]][move[3]].getPawn());
-			} else {
+			} else if(this.grid[move[2]][move[3]].getPawn().getType().equals(Type.WHITE)){
 				this.pawnGame.remove(this.grid[move[2]][move[3]].getPawn());
-				this.current.myPawn.remove(this.grid[move[2]][move[3]].getPawn());
+				this.firstPlayer.myPawn.remove(this.grid[move[2]][move[3]].getPawn());
+			} else if (this.grid[move[2]][move[3]].getPawn().getType().equals(Type.BLACK)){
+				this.pawnGame.remove(this.grid[move[2]][move[3]].getPawn());
+				this.secondPlayer.myPawn.remove(this.grid[move[2]][move[3]].getPawn());
 			}
 
 			this.grid[move[2]][move[3]].setPawn(this.grid[move[0]][move[1]].getPawn());

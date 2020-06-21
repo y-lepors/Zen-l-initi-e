@@ -29,21 +29,30 @@ public class AutoPlayer extends Player {
 	@Override
 	public int[] newMove(Square[][] grid) {
 		this.grid = grid;
+		ArrayList<int[]> possibleMove = null;
 		final int[] ret = new int[4];
-		System.out.println("Au tour du bot : "+this.name);
-		System.out.println("Le bot séléctionne un pion aléatoirement");
-		int random = (int) (Math.random() * this.myPawn.size());
-		Pawn pawnChoose = this.myPawn.get(random);
-		ret[0] = pawnChoose.getxOrigin();
-		ret[1] = pawnChoose.getyOrigin();
-		System.out.println("Le bot choisi le pion en y = "+ret[0]+" et x ="+ret[1]);
-		ArrayList<int[]> possibleMove = whichMove(ret[0], ret[1]);
-		boolean k = false;
+		boolean loop = false;
+		while(!loop){
+			System.out.println("Au tour du bot : " + this.name);
+			System.out.println("Le bot séléctionne un pion aléatoirement");
+			int random = (int) (Math.random() * this.myPawn.size());
+			Pawn pawnChoose = this.myPawn.get(random);
+			ret[0] = pawnChoose.getxOrigin();
+			ret[1] = pawnChoose.getyOrigin();
+			System.out.println("Le bot choisi le pion en y = " + ret[0] + " et x =" + ret[1]);
+			if(!this.grid[ret[0]][ret[1]].isFree()) {
+				possibleMove = whichMove(ret[0], ret[1]);
+				if (possibleMove.size() > 0) {
+					loop = true;
+				}
+			}
+		}
 		int randomChoice = (int) (Math.random() * possibleMove.size());
 		System.out.print("Déplacement possible : ");
 		for(int[] j : possibleMove){
 			System.out.print(j[0]+","+j[1]+" | ");
 		}
+
 		ret[2] = possibleMove.get(randomChoice)[0];
 		ret[3] = possibleMove.get(randomChoice)[1];
 
@@ -146,6 +155,8 @@ public class AutoPlayer extends Player {
 			coordinate[1] = posY - diagonalLeftMove;
 			ret.add(coordinate);
 		}
+
+
 
 		return ret;
 	}

@@ -33,40 +33,20 @@ public class ZenGame implements Serializable {
 	 * @param playerName The first player name
 	 * @param playerName2 The second player name
 	 */
-	public ZenGame(String playerName, String playerName2, Mode mode, IGameMenu iGameMenu) {
+	public ZenGame(String playerName, String playerName2, Mode mode, IGameMenu iGameMenu, GraphicType gameType) {
 
 		if(playerName != null && playerName2 != null){
 			this.playerName = playerName;
 			this.playerName2 = playerName2;
 			this.pawnGame = new ArrayList<Pawn>();
+			this.gameType = gameType;
 			this.initializePawn();
 			this.initializeGrid();
 			this.mode = mode;
 			this.gameMenu = iGameMenu;
-			this.gamePlay = new GameManager(this.pawnGame, this.playerName, this.playerName2, this.gameMenu, this.grid, this.mode);
+			this.gamePlay = new GameManager(this.pawnGame, this.playerName, this.playerName2, this.gameMenu, this.grid, this.mode, this.gameType);
 		} else {
 			System.err.println("Name must be initialized");
-		}
-	}
-
-
-	/**
-	 * Ask the user about the graphic type
-	 * @return The graphic type to use
-	 */
-	public void askGameType() {
-
-		Object[] type = {"Console", "Graphic"};
-		int index = JOptionPane.showOptionDialog(null,
-				"Quel mode de jeu ?",
-				"Mode de jeu",
-				JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE,
-				new ImageIcon("./data/logo_Zen.png"), type, type[0]);
-		if(index == 0){
-			this.gameType = GraphicType.Console;
-		} else {
-			this.gameType = GraphicType.Graphic;
 		}
 	}
 

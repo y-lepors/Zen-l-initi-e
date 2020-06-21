@@ -30,6 +30,7 @@ public class HumanPlayer extends Player {
 	 */
 	public int[] newMove(Square[][] grid) {
 		this.grid = grid;
+		ArrayList<int[]> possibleMove = null;
 		final int[] ret = new int[4];
 		System.out.println("Au tour de "+this.name);
 		boolean i = false;
@@ -43,7 +44,12 @@ public class HumanPlayer extends Player {
 				if (ret[0] >= 0 && ret[0] < ZenGame.height && ret[1] >= 0 && ret[1] < ZenGame.width) {
 					if(!grid[ret[0]][ret[1]].isFree()) {
 						if (grid[ret[0]][ret[1]].getPawn().getType() == this.getMyColor() || grid[ret[0]][ret[1]].getPawn().getType() == Type.ZEN) {
-							i = true;
+							possibleMove = whichMove(ret[0], ret[1]);
+							if(possibleMove.size() > 0){
+								i = true;
+							} else {
+								System.out.println("Erreur aucun coup possible pour ce pion");
+							}
 						} else {
 							i = false;
 							System.out.println("Erreur coordonnées non valide le pion ne vous appartiens pas!");
@@ -56,7 +62,7 @@ public class HumanPlayer extends Player {
 				}
 		} while (!i);
 		System.out.println();
-		ArrayList<int[]> possibleMove = whichMove(ret[0], ret[1]);
+
 		boolean k = false;
 		do {
 			Scanner sc = new Scanner(System.in);

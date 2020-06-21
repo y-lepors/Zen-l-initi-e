@@ -2,6 +2,7 @@ package consoleView.frame;
 
 import consoleView.GraphicGameMenu;
 import zenGame.Square;
+import zenGame.Type;
 
 import javax.swing.*;
 
@@ -45,13 +46,13 @@ public class GameFrame extends JFrame {
 
         for(int i = 0 ; i < 11; i++){
             for(int j = 0 ; j < 11 ; j++){
-                if(grid[i][j].getCharType() == '.' ){
+                if(grid[i][j].isFree()){
                     gridPanel.add(new JButton("."));
-                } else if (grid[i][j].getCharType() == 'Z'){
+                } else if (grid[i][j].getPawn().getType().equals(zenGame.Type.ZEN)){
                     gridPanel.add(new JButton("ZEN"));
-                } else if (grid[i][j].getCharType() == 'B') {
+                } else if (grid[i][j].getPawn().getType().equals(zenGame.Type.WHITE)) {
                     gridPanel.add(new JButton("BLANC"));
-                } else if (grid[i][j].getCharType() == 'N') {
+                } else if (grid[i][j].getPawn().getType().equals(zenGame.Type.BLACK)) {
                     gridPanel.add(new JButton("NOIR"));
                 }
             }

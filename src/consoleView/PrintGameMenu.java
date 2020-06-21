@@ -110,12 +110,12 @@ public class PrintGameMenu implements IGameMenu {
 			if (str.equals("1") || str.equals("HumainHumain")) {
 				m = Mode.HumainHumain;
 				System.out.println("Vous avez choisi le mode humain vs humain");
-				ZenGame zenGame = new ZenGame("Yanis", "Enzo", Mode.HumainHumain, this);
+				ZenGame zenGame = new ZenGame("Yanis", "Enzo", Mode.HumainHumain, this, GraphicType.Console);
 				loop = true;
 			} else if (str.equals("2") || str.equals("HumainRobot")) {
 				System.out.println("Vous avez choisi le mode humain vs robot");
 				m = Mode.HumainRobot;
-				ZenGame zenGame = new ZenGame("Yanis", "Enzo", Mode.HumainRobot, this);
+				ZenGame zenGame = new ZenGame("Yanis", "Enzo", Mode.HumainRobot, this, GraphicType.Console);
 				loop = true;
 			} else {
 				System.err.println("Mauvaise valeur recommencez :");
