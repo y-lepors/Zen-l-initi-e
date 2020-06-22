@@ -1,7 +1,11 @@
 package zenGame;
 
+import javax.swing.*;
 import java.io.Serializable;
 import java.util.*;
+
+import static java.lang.Integer.parseInt;
+import static java.lang.System.exit;
 
 /**
  * This class allows you to create a player
@@ -13,6 +17,7 @@ public abstract class Player implements Serializable {
 	ArrayList<Pawn> myPawn;
 	private Type myColor;
 	protected String name;
+	protected GraphicType gameType;
 
 
 	/**
@@ -20,7 +25,8 @@ public abstract class Player implements Serializable {
 	 * @param pawnGame List of pawn
 	 * @param name Player's name
 	 */
-	public Player(ArrayList<Pawn> pawnGame, String name, int playerNumber) {
+	public Player(ArrayList<Pawn> pawnGame, String name, int playerNumber,GraphicType gameType) {
+		this.gameType = gameType;
 		if(name != null && pawnGame != null){
 			this.name = name;
 			this.myPawn = new ArrayList<Pawn>();
@@ -70,5 +76,48 @@ public abstract class Player implements Serializable {
 	 */
 	public void eliminateAPawn(Pawn pawn){
 		this.myPawn.remove(pawn);
+	}
+
+	public int[] askCoordinate(){
+		int[] ret = new int[2];
+		String s;
+		boolean i = false;
+
+		while(!i) {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Donnez votre coordonnées en y :");
+			s = sc.nextLine();
+			if(s.equals("sq")){
+				exit(0);
+			} else {
+				ret[0] = parseInt(s);
+			}
+			System.out.println("Donnez votre coordonnées en x :");
+			s = sc.nextLine();
+			if(s.equals("sq")){
+				exit(0);
+			} else {
+				ret[1] = parseInt(s);
+			}
+			if(ret[0] >= 0 && ret[0] < 11 && ret[1] >= 0 && ret[1] < 11){
+				i = true;
+			}
+		}
+		return ret;
+	}
+
+	public int[] graphicAskCoordinate(){
+		int[] ret = new int[2];
+
+		boolean i = false;
+		while(!i) {
+			ret[0] = parseInt(JOptionPane.showInputDialog("Donnez votre coordonnées en y"));
+			ret[1] = parseInt(JOptionPane.showInputDialog("Donnez votre coordonnées en x"));
+			if(ret[0] >= 0 && ret[0] < 11 && ret[1] >= 0 && ret[1] < 11){
+				i = true;
+			}
+		}
+
+		return ret;
 	}
 }

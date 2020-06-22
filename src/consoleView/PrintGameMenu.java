@@ -19,6 +19,7 @@ public class PrintGameMenu implements IGameMenu {
 	public static final String ANSI_CYAN = "\u001B[36m";
 	public static final String ANSI_YELLOW = "\u001B[33m";
 	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_GREEN = "\u001B[32m";
 	private Square[][] grid;
 	private int nbX, nbY;
 
@@ -190,7 +191,16 @@ public class PrintGameMenu implements IGameMenu {
 		for (int i = 10; i >= 0; i--) {
 			System.out.print(i + " | ");
 			for (int j = 0; j < 11; j++) {
-				System.out.print("       " + this.grid[i][j].getCharType());
+				if(this.grid[i][j].getCharType() == '.') {
+					System.out.print("       " + this.grid[i][j].getCharType());
+				} else if(this.grid[i][j].getCharType() == 'B') {
+					System.out.print("       " + ANSI_CYAN + this.grid[i][j].getCharType() + ANSI_RESET);
+				} else if(this.grid[i][j].getCharType() == 'N') {
+					System.out.print("       " + ANSI_YELLOW +this.grid[i][j].getCharType() + ANSI_RESET);
+				} else if(this.grid[i][j].getCharType() == 'Z') {
+					System.out.print("       " + ANSI_GREEN +this.grid[i][j].getCharType() + ANSI_RESET);
+				}
+
 			}
 			System.out.println(" | " + i);
 			System.out.println("  |                                                                                          |");
@@ -277,5 +287,19 @@ public class PrintGameMenu implements IGameMenu {
 				System.err.println("Mauvaise valeur recommencez :");
 			}
 		}
+	}
+
+	@Override
+	public int[] askCoordinate(){
+		int[] ret = new int[2];
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Séléctionnez votre pion :");
+		System.out.println("Donnez votre coordonnées en y :");
+		ret[0] = sc.nextInt();
+		System.out.println("Donnez votre coordonnées en x :");
+		ret[1] = sc.nextInt();
+
+		return ret;
 	}
 }

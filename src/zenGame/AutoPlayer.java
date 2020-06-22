@@ -18,8 +18,8 @@ public class AutoPlayer extends Player {
 	 * @param myPawn The list of pawn
 	 * @param name The name of the auto player
 	 */
-	public AutoPlayer(ArrayList<Pawn> myPawn, String name, int playerNumber) {
-		super(myPawn, name, playerNumber);
+	public AutoPlayer(ArrayList<Pawn> myPawn, String name, int playerNumber, GraphicType gameType) {
+		super(myPawn, name, playerNumber, gameType);
 	}
 
 	/**

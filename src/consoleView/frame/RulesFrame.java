@@ -14,17 +14,18 @@ public class RulesFrame extends JFrame {
      * Initialize and construct the Rules frame
      */
     public RulesFrame(){
-        super("Zen L'Initiée");
+        super("Zen L'Initié");
         this.setSize(1200,800);
         this.setContentPane(new RulesFond());
         this.setLayout(new FlowLayout());
         this.setIconImage(GraphicGameMenu.image.getImage());
         this.setVisible(true);
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-        backButton = new JButton("RETOUR",new ImageIcon("./data/backButton.png"));
+        backButton = new JButton("RETOUR",new ImageIcon(this.getClass().getResource("/rss/backButton.png")));
 
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

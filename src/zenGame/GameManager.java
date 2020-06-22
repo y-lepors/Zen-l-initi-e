@@ -28,6 +28,7 @@ public class GameManager implements Serializable {
 	ArrayList<Pawn> pawnListWinner;
 	ArrayList<Pawn> winnerList;
 	private GraphicType gameType;
+	private GameFrame gameFrame;
 
 
 	/**
@@ -44,13 +45,13 @@ public class GameManager implements Serializable {
 		if(pawnGame != null && playerName != null && playerName2 != null){
 			this.pawnGame = pawnGame;
 			if(this.mode == Mode.HumainHumain){
-				this.firstPlayer = new HumanPlayer(pawnGame, playerName, this.playerNumber);
+				this.firstPlayer = new HumanPlayer(pawnGame, playerName, this.playerNumber, gameType);
 				this.playerNumber++;
-				this.secondPlayer = new HumanPlayer(pawnGame, playerName2, this.playerNumber);
+				this.secondPlayer = new HumanPlayer(pawnGame, playerName2, this.playerNumber, gameType);
 			} else if(this.mode == Mode.HumainRobot){
-				this.firstPlayer = new HumanPlayer(pawnGame, playerName, this.playerNumber);
+				this.firstPlayer = new HumanPlayer(pawnGame, playerName, this.playerNumber, gameType);
 				this.playerNumber++;
-				this.secondPlayer = new AutoPlayer(pawnGame, playerName2, this.playerNumber);
+				this.secondPlayer = new AutoPlayer(pawnGame, playerName2, this.playerNumber, gameType);
 			}
 			this.current = this.secondPlayer;
 		}
@@ -64,7 +65,11 @@ public class GameManager implements Serializable {
 		if(this.gameType.equals(GraphicType.Console)) {
 			this.gameMenu.gamePage(this.grid);
 		} else if (this.gameType.equals(GraphicType.Graphic)){
-			//GameFrame gameFrame = new GameFrame(this.grid);
+			if(this.gameFrame != null){
+				this.gameFrame.dispose();
+			}
+			this.gameFrame = new GameFrame(this.grid);
+			this.gameFrame.repaint();
 		}
 	}
 
@@ -74,6 +79,7 @@ public class GameManager implements Serializable {
 	 */
 	public void start() {
 		boolean loop = false;
+		this.displayTheGrid();
 		while(!loop) {
 			this.changeCurrent();
 			this.displayTheGrid();

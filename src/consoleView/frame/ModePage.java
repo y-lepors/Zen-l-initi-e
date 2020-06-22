@@ -13,17 +13,18 @@ public class ModePage extends JFrame {
     private JButton hAButton;
 
     public ModePage(){
-        super("Zen L'Initiée");
+        super("Zen L'Initié");
         this.setSize(1200,800);
         this.setContentPane(new PanelFond());
         this.setLayout(new FlowLayout());
         this.setIconImage(GraphicGameMenu.image.getImage());
         this.setVisible(true);
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        hHButton = new JButton("Humain vs Humain", new ImageIcon("./data/HH.png"));
-        hAButton = new JButton("Humain vs robot", new ImageIcon("./data/ai.png"));
+        hHButton = new JButton("Humain vs Humain", new ImageIcon(this.getClass().getResource("/rss/HH.png")));
+        hAButton = new JButton("Humain vs robot", new ImageIcon(this.getClass().getResource("/rss/ai.png")));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -56,6 +57,10 @@ public class ModePage extends JFrame {
         return hAButton;
     }
 
+    /**
+     * Get the human human Button
+     * @return The HH Button
+     */
     public JButton getHHButton() {
         return hHButton;
     }

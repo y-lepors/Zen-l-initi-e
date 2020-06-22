@@ -4,6 +4,7 @@ import consoleView.frame.FirstFramePage;
 import consoleView.frame.GameFrame;
 import consoleView.frame.SecondFramePage;
 import consoleView.listener.FirstListenerPage;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import zenGame.Mode;
 import zenGame.Square;
 import zenGame.ZenGame;
@@ -17,7 +18,6 @@ public class GraphicGameMenu implements IGameMenu {
     public final static ImageIcon image = new ImageIcon("./data/logoVoid.png");
 
     public GraphicGameMenu(){
-        this.printFirstPage();
     }
 
     @Override
@@ -55,5 +55,10 @@ public class GraphicGameMenu implements IGameMenu {
     @Override
     public void endGamePage() {
 
+    }
+
+    @Override
+    public int[] askCoordinate() {
+        return new int[0];
     }
 }

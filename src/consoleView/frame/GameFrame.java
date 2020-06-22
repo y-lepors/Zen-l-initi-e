@@ -13,12 +13,13 @@ public class GameFrame extends JFrame {
 
     public GameFrame(Square[][] grid) {
         this.grid = grid;
-        this.setName("Zen L'Initiée");
+        this.setName("Zen L'Initié");
         this.setSize(1200,800);
         this.setContentPane(new PanelFond());
         this.setIconImage(GraphicGameMenu.image.getImage());
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.gridPanel = new JPanel();

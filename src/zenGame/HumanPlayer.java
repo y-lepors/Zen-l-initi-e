@@ -1,5 +1,8 @@
 package zenGame;
 
+import consoleView.IGameMenu;
+import consoleView.PrintGameMenu;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -20,8 +23,8 @@ public class HumanPlayer extends Player {
 	 * @param myPawn Player's pawn list
 	 * @param name PLayer's name
 	 */
-	public HumanPlayer(ArrayList<Pawn> myPawn, String name, int playerNumber) {
-		super(myPawn, name, playerNumber);
+	public HumanPlayer(ArrayList<Pawn> myPawn, String name, int playerNumber, GraphicType gameType) {
+		super(myPawn, name, playerNumber, gameType);
 	}
 
 	/**
@@ -35,12 +38,17 @@ public class HumanPlayer extends Player {
 		System.out.println("Au tour de "+this.name);
 		boolean i = false;
 		do {
-				Scanner sc = new Scanner(System.in);
 				System.out.println("Séléctionnez votre pion :");
-				System.out.println("Donnez votre coordonnées en y :");
-				ret[0] = sc.nextInt();
-				System.out.println("Donnez votre coordonnées en x :");
-				ret[1] = sc.nextInt();
+				if(this.gameType == GraphicType.Console) {
+					int[] coordinate = askCoordinate();
+					ret[0] = coordinate[0];
+					ret[1] = coordinate[1];
+				} else if(this.gameType == GraphicType.Graphic){
+					int[] coordinate = graphicAskCoordinate();
+					ret[0] = coordinate[0];
+					ret[1] = coordinate[1];
+				}
+
 				if (ret[0] >= 0 && ret[0] < ZenGame.height && ret[1] >= 0 && ret[1] < ZenGame.width) {
 					if(!grid[ret[0]][ret[1]].isFree()) {
 						if (grid[ret[0]][ret[1]].getPawn().getType() == this.getMyColor() || grid[ret[0]][ret[1]].getPawn().getType() == Type.ZEN) {
@@ -71,12 +79,18 @@ public class HumanPlayer extends Player {
 				System.out.print(j[0]+","+j[1]+" | ");
 			}
 			System.out.println("Donnez les coordonnées vers où déplacer le pion :");
-			System.out.println("Donnez votre coordonnées en y :");
-			ret[2] = sc.nextInt();
-			System.out.println("Donnez votre coordonnées en x :");
-			ret[3] = sc.nextInt();
+			if(this.gameType == GraphicType.Console) {
+				int[] coordinate = askCoordinate();
+				ret[2] = coordinate[0];
+				ret[3] = coordinate[1];
+			} else if(this.gameType == GraphicType.Graphic){
+				int[] coordinate = graphicAskCoordinate();
+				ret[2] = coordinate[0];
+				ret[3] = coordinate[1];
+			}
 
-			for(int[] j : possibleMove){
+
+				for(int[] j : possibleMove){
 				if (j[0] == ret[2] && j[1] == ret[3]) {
 					k = true;
 					break;

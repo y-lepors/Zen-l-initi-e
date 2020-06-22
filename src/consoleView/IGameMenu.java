@@ -16,4 +16,5 @@ public interface IGameMenu {
     public void rulesPage();
     public void loadPage();
     public void endGamePage();
+    public int[] askCoordinate();
 }

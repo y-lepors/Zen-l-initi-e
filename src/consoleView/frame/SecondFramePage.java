@@ -13,17 +13,18 @@ public class SecondFramePage extends JFrame {
     private JButton backButton;
 
     public SecondFramePage(){
-        super("Zen L'Initiée");
+        super("Zen L'Initié");
         this.setSize(1200,800);
         this.setLocationRelativeTo(null);
         this.setContentPane(new PanelFond());
         this.setIconImage(GraphicGameMenu.image.getImage());
         this.setLayout(new FlowLayout());
         this.setVisible(true);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.newGameButton = new JButton("NOUVELLE PARTIE");
         this.loadButton = new JButton("CHARGER");
-        this.backButton = new JButton("RETOUR", new ImageIcon("./data/backButton.png"));
+        this.backButton = new JButton("RETOUR", new ImageIcon(this.getClass().getResource("/rss/backButton.png")));
         this.add(this.newGameButton);
         this.add(this.loadButton);
         this.add(this.backButton);

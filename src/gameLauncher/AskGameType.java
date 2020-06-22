@@ -3,6 +3,8 @@ package gameLauncher;
 import consoleView.GraphicGameMenu;
 import consoleView.IGameMenu;
 import consoleView.PrintGameMenu;
+import consoleView.frame.FirstFramePage;
+import consoleView.listener.FirstListenerPage;
 import zenGame.GraphicType;
 
 import javax.swing.*;
@@ -17,7 +19,9 @@ public class AskGameType {
         if(this.gameType.equals(GraphicType.Console)){
             this.gameMenu = new PrintGameMenu();
         } else if(this.gameType.equals(GraphicType.Graphic)){
-            this.gameMenu = new GraphicGameMenu();
+            //this.gameMenu = new GraphicGameMenu();
+            FirstFramePage firstFramePage = new FirstFramePage();
+            FirstListenerPage firstListenerPage = new FirstListenerPage(firstFramePage);
         }
     }
 
@@ -36,7 +40,7 @@ public class AskGameType {
                 new ImageIcon("./data/logo_Zen.png"), type, type[0]);
         if(index == 0){
             this.gameType = GraphicType.Console;
-        } else {
+        } else if(index == 1) {
             this.gameType = GraphicType.Graphic;
         }
     }

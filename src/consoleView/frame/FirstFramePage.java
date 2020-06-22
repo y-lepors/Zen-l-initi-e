@@ -19,16 +19,17 @@ public class FirstFramePage extends JFrame {
     private ImageIcon image;
 
     public FirstFramePage(){
-        super("Zen L'Initiée");
+        super("Zen L'Initié");
         this.setSize(1200,800);
         this.setContentPane(new PanelFond());
         this.setIconImage(GraphicGameMenu.image.getImage());
         this.setVisible(true);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.playButton = new JButton("JOUER", new ImageIcon("./data/playButton.png"));
-        this.rulesButton = new JButton("REGLES", new ImageIcon("./data/rulesButton.png"));
-        this.exitButton = new JButton("QUITTER", new ImageIcon("./data/exitButton.png"));
+        this.playButton = new JButton("JOUER", new ImageIcon(this.getClass().getResource("/rss/playButton.png")));
+        this.rulesButton = new JButton("REGLES", new ImageIcon(this.getClass().getResource("/rss/rulesButton.png")));
+        this.exitButton = new JButton("QUITTER", new ImageIcon(this.getClass().getResource("/rss/exitButton.png")));
         this.add(playButton);
         this.add(rulesButton);
         this.add(exitButton);
