@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test the square
+ */
 public class SquareTest {
 
     Square s;

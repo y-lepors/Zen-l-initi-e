@@ -9,17 +9,22 @@ import zenGame.GraphicType;
 
 import javax.swing.*;
 
+/**
+ * Ask the gameType when you execute the JAR
+ */
 public class AskGameType {
 
     private GraphicType gameType;
     private IGameMenu gameMenu;
 
+    /**
+     * Ask the gameType to the user
+     */
     public AskGameType(){
         askGameType();
         if(this.gameType.equals(GraphicType.Console)){
             this.gameMenu = new PrintGameMenu();
         } else if(this.gameType.equals(GraphicType.Graphic)){
-            //this.gameMenu = new GraphicGameMenu();
             FirstFramePage firstFramePage = new FirstFramePage();
             FirstListenerPage firstListenerPage = new FirstListenerPage(firstFramePage);
         }
@@ -27,7 +32,6 @@ public class AskGameType {
 
     /**
      * Ask the user about the graphic type
-     * @return The graphic type to use
      */
     public void askGameType() {
 

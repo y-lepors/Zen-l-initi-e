@@ -1,13 +1,8 @@
 package zenGame;
 
-import consoleView.GraphicGameMenu;
 import consoleView.IGameMenu;
-import consoleView.PrintGameMenu;
 
-import javax.swing.*;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -29,13 +24,16 @@ public class ZenGame implements Serializable {
 	private Mode mode;
 
 	/**
-	 * Initialize the player name
+	 * Initialize the Zen Game
 	 * @param playerName The first player name
 	 * @param playerName2 The second player name
+	 * @param mode The mode
+	 * @param iGameMenu The interface Game Menu
+	 * @param gameType The gameType
 	 */
 	public ZenGame(String playerName, String playerName2, Mode mode, IGameMenu iGameMenu, GraphicType gameType) {
 
-		if(playerName != null && playerName2 != null){
+		if (playerName != null && playerName2 != null) {
 			this.playerName = playerName;
 			this.playerName2 = playerName2;
 			this.pawnGame = new ArrayList<Pawn>();
@@ -53,37 +51,37 @@ public class ZenGame implements Serializable {
 	/**
 	 * Initialize every pawn
 	 */
-	public void initializePawn(){
+	public void initializePawn() {
 		// BLACK PAWN
-		pawnGame.add(new Pawn(0,0,Type.BLACK));
-		pawnGame.add(new Pawn(0,5,Type.BLACK));
-		pawnGame.add(new Pawn(2,7,Type.BLACK));
-		pawnGame.add(new Pawn(2,3,Type.BLACK));
-		pawnGame.add(new Pawn(4,1,Type.BLACK));
-		pawnGame.add(new Pawn(6,1,Type.BLACK));
-		pawnGame.add(new Pawn(8,3,Type.BLACK));
-		pawnGame.add(new Pawn(10,5,Type.BLACK));
-		pawnGame.add(new Pawn(8,7,Type.BLACK));
-		pawnGame.add(new Pawn(6,9,Type.BLACK));
-		pawnGame.add(new Pawn(4,9,Type.BLACK));
-		pawnGame.add(new Pawn(10,10,Type.BLACK));
+		pawnGame.add(new Pawn(0, 0, Type.BLACK));
+		pawnGame.add(new Pawn(0, 5, Type.BLACK));
+		pawnGame.add(new Pawn(2, 7, Type.BLACK));
+		pawnGame.add(new Pawn(2, 3, Type.BLACK));
+		pawnGame.add(new Pawn(4, 1, Type.BLACK));
+		pawnGame.add(new Pawn(6, 1, Type.BLACK));
+		pawnGame.add(new Pawn(8, 3, Type.BLACK));
+		pawnGame.add(new Pawn(10, 5, Type.BLACK));
+		pawnGame.add(new Pawn(8, 7, Type.BLACK));
+		pawnGame.add(new Pawn(6, 9, Type.BLACK));
+		pawnGame.add(new Pawn(4, 9, Type.BLACK));
+		pawnGame.add(new Pawn(10, 10, Type.BLACK));
 
 		//WHITE PAWN
-		pawnGame.add(new Pawn(10,0,Type.WHITE));
-		pawnGame.add(new Pawn(5,0,Type.WHITE));
-		pawnGame.add(new Pawn(7,2,Type.WHITE));
-		pawnGame.add(new Pawn(9,4,Type.WHITE));
-		pawnGame.add(new Pawn(9,6,Type.WHITE));
-		pawnGame.add(new Pawn(7,8,Type.WHITE));
-		pawnGame.add(new Pawn(5,10,Type.WHITE));
-		pawnGame.add(new Pawn(3,8,Type.WHITE));
-		pawnGame.add(new Pawn(1,6,Type.WHITE));
-		pawnGame.add(new Pawn(1,4,Type.WHITE));
-		pawnGame.add(new Pawn(3,2,Type.WHITE));
-		pawnGame.add(new Pawn(0,10,Type.WHITE));
+		pawnGame.add(new Pawn(10, 0, Type.WHITE));
+		pawnGame.add(new Pawn(5, 0, Type.WHITE));
+		pawnGame.add(new Pawn(7, 2, Type.WHITE));
+		pawnGame.add(new Pawn(9, 4, Type.WHITE));
+		pawnGame.add(new Pawn(9, 6, Type.WHITE));
+		pawnGame.add(new Pawn(7, 8, Type.WHITE));
+		pawnGame.add(new Pawn(5, 10, Type.WHITE));
+		pawnGame.add(new Pawn(3, 8, Type.WHITE));
+		pawnGame.add(new Pawn(1, 6, Type.WHITE));
+		pawnGame.add(new Pawn(1, 4, Type.WHITE));
+		pawnGame.add(new Pawn(3, 2, Type.WHITE));
+		pawnGame.add(new Pawn(0, 10, Type.WHITE));
 
 		// ZEN PAWN
-		pawnGame.add(new Pawn(5,5,Type.ZEN));
+		pawnGame.add(new Pawn(5, 5, Type.ZEN));
 	}
 
 	/**
@@ -129,20 +127,5 @@ public class ZenGame implements Serializable {
 		// ZEN PAWN
 		this.grid[5][5].setPawn(pawnGame.get(24));
 
-	}
-
-	/**
-	 * Save the game
-	 * @param fileName The path to save
-	 */
-	public void gameSave(String fileName) {
-		try {
-			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("./data/"+fileName+".bin"));
-			out.writeObject(this);
-			out.close();
-			System.out.println("Serialization done");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 }

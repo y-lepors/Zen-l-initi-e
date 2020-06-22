@@ -1,12 +1,12 @@
 package consoleView;
 
-import zenGame.GraphicType;
-import zenGame.Mode;
-import zenGame.Square;
-import zenGame.ZenGame;
+import zenGame.*;
 
+import java.io.File;
+import java.io.Serializable;
 import java.util.Scanner;
 
+import static java.lang.Integer.parseInt;
 import static java.lang.System.exit;
 
 /**
@@ -14,7 +14,7 @@ import static java.lang.System.exit;
  * @author LePors
  * @version 1.0
  */
-public class PrintGameMenu implements IGameMenu {
+public class PrintGameMenu implements IGameMenu, Serializable {
 
 	public static final String ANSI_CYAN = "\u001B[36m";
 	public static final String ANSI_YELLOW = "\u001B[33m";
@@ -22,6 +22,7 @@ public class PrintGameMenu implements IGameMenu {
 	public static final String ANSI_GREEN = "\u001B[32m";
 	private Square[][] grid;
 	private int nbX, nbY;
+
 
 	/**
 	 * This method print the game menu
@@ -161,6 +162,7 @@ public class PrintGameMenu implements IGameMenu {
 				loop = true;
 			} else if (str.equals("2") || str.equals("CHARGER")) {
 				System.out.println("Vous avez choisi \"CHARGER\" ");
+				this.loadPage();
 				loop = true;
 
 			} else if (str.equals("3") || str.equals("RETOUR")) {
@@ -177,7 +179,7 @@ public class PrintGameMenu implements IGameMenu {
 	 * Display the grid page
 	 */
 	@Override
-	public void gamePage(Square[][] grid) {
+	public void gamePage(Square[][] grid, GameManager gameManager) {
 		this.grid = grid;
 		for (int i = 0; i < 50; i++) {
 			System.out.println();
@@ -236,18 +238,20 @@ public class PrintGameMenu implements IGameMenu {
 				"VOTRE CHOIX : ");
 
 		boolean loop = false;
-		while (!loop) {
-			Scanner sc = new Scanner(System.in);
-			String str = sc.nextLine();
+		try {
+			while (!loop) {
+				Scanner sc = new Scanner(System.in);
+				String str = sc.nextLine();
 
-			if (str.equals("1") || str.equals("RETOUR")) {
-				System.out.println("Vous avez choisi \"RETOUR\"");
-				this.printFirstPage();
-				loop = true;
-			} else {
-				System.err.println("Mauvaise valeur recommencez :");
+				if (str.equals("1") || str.equals("RETOUR")) {
+					System.out.println("Vous avez choisi \"RETOUR\"");
+					this.printFirstPage();
+					loop = true;
+				} else {
+					System.err.println("Mauvaise valeur recommencez :");
+				}
 			}
-		}
+		} catch (Exception ex){}
 	}
 
 	/**
@@ -255,7 +259,35 @@ public class PrintGameMenu implements IGameMenu {
 	 */
 	@Override
 	public void loadPage() {
-		System.out.println("LOAD PAGE");
+
+		File repertoire = new File("./data/saves/");
+
+		int i;
+		String [] fileList = repertoire.list();
+		for (i = 0; i < fileList.length; i++) {
+			System.out.println(i + ".  "+ fileList[i]);
+		}
+
+		boolean loop = false;
+		System.out.println("Entrer \"r\" pour retour ou le numéro de partie à charger");
+		System.out.println("CHARGER VOTRE PARTIE :");
+		while (!loop) {
+			Scanner sc = new Scanner(System.in);
+			String str = sc.nextLine();
+
+			if (str.equals("r") || str.equals("RETOUR")) {
+				System.out.println("Vous avez choisi \"RETOUR\" ");
+				this.printSecondPage();
+				loop = true;
+			} else {
+				//ZenGame zenGame = new ZenGame("Yanis","Enzo",null,null,null);
+				//		zenGame.loadGame(fileList[parseInt(str)]);
+				System.out.println("Vous avez choisi  "+fileList[parseInt(str)]);
+				GameManager gameManager = new GameManager("./data/saves/"+fileList[parseInt(str)]);
+				//zenGame.loadGame(fileList[parseInt(str)]);
+				loop = true;
+			}
+		}
 	}
 
 	/**
@@ -289,6 +321,10 @@ public class PrintGameMenu implements IGameMenu {
 		}
 	}
 
+	/**
+	 * ASK the coordinate
+	 * @return The coordinate
+	 */
 	@Override
 	public int[] askCoordinate(){
 		int[] ret = new int[2];

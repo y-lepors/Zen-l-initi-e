@@ -11,6 +11,9 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test the game manager
+ */
 public class GameManagerTest {
 
     GameManager g;

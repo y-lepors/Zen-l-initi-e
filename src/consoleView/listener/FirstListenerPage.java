@@ -9,18 +9,29 @@ import java.awt.event.ActionListener;
 
 import static java.lang.System.exit;
 
+/**
+ * The first page listener
+ */
 public class FirstListenerPage implements ActionListener {
 
     FirstFramePage m;
     SecondFramePage s;
     RulesFrame r;
 
+    /**
+     * The constructor that initialize the frame and set the action listener
+     * @param m The FirstFramePage
+     */
     public FirstListenerPage(FirstFramePage m){
         this.m = m;
         m.setActionListener(this);
 
     }
 
+    /**
+     * This method is used to react to the action from the user
+     * @param e The captured action
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == m.getPlayButton()){

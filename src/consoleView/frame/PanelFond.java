@@ -5,6 +5,7 @@ package consoleView.frame;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -21,7 +22,6 @@ public class PanelFond extends JPanel {
      */
     PanelFond(){
         try {
-            URL url = this.getClass().getClassLoader().getResource("/rss/background.png");
             image = ImageIO.read(new File("./data/background.png"));
         } catch (IOException e) {
             e.printStackTrace();

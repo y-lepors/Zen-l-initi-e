@@ -6,12 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Second frame page
+ */
 public class SecondFramePage extends JFrame {
 
     private JButton newGameButton;
     private JButton loadButton;
     private JButton backButton;
 
+    /**
+     * Initialize and create the second frame page with every components
+     */
     public SecondFramePage(){
         super("Zen L'Initié");
         this.setSize(1200,800);
@@ -54,20 +60,36 @@ public class SecondFramePage extends JFrame {
         );
     }
 
+    /**
+     * Set an action listener to react with the users interactions
+     * @param a The action listener
+     */
     public void setActionListener(ActionListener a){
         newGameButton.addActionListener(a);
         loadButton.addActionListener(a);
         backButton.addActionListener(a);
     }
 
+    /**
+     * Get the new game button
+     * @return The new game JButton
+     */
     public JButton getNewGameButton() {
         return newGameButton;
     }
 
+    /**
+     * Get the load button
+     * @return The load JButton
+     */
     public JButton getLoadButton() {
         return loadButton;
     }
 
+    /**
+     * Get the back button
+     * @return The back JButton
+     */
     public JButton getBackButton() {
         return backButton;
     }

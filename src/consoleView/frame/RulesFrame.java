@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Rules frame
+ */
 public class RulesFrame extends JFrame {
 
     private JButton backButton;

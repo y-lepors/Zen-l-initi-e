@@ -3,10 +3,9 @@ package zenGame;
 import consoleView.IGameMenu;
 import consoleView.PrintGameMenu;
 import consoleView.frame.GameFrame;
+import consoleView.listener.GameFrameListener;
 
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -28,14 +27,17 @@ public class GameManager implements Serializable {
 	ArrayList<Pawn> pawnListWinner;
 	ArrayList<Pawn> winnerList;
 	private GraphicType gameType;
-	private GameFrame gameFrame;
 
 
 	/**
-	 * Initialize every variables
+	 Initialize every variables
 	 * @param pawnGame The list of pawn
 	 * @param playerName The first player name
 	 * @param playerName2 The second player name
+	 * @param gameMenu The gameMenu
+	 * @param grid The grid
+	 * @param mode The mode
+	 * @param gameType The gameType
 	 */
 	public GameManager(ArrayList<Pawn> pawnGame, String playerName, String playerName2, IGameMenu gameMenu, Square[][] grid, Mode mode, GraphicType gameType) {
 		this.grid = grid;
@@ -45,13 +47,13 @@ public class GameManager implements Serializable {
 		if(pawnGame != null && playerName != null && playerName2 != null){
 			this.pawnGame = pawnGame;
 			if(this.mode == Mode.HumainHumain){
-				this.firstPlayer = new HumanPlayer(pawnGame, playerName, this.playerNumber, gameType);
+				this.firstPlayer = new HumanPlayer(pawnGame, playerName, this.playerNumber, gameType,this);
 				this.playerNumber++;
-				this.secondPlayer = new HumanPlayer(pawnGame, playerName2, this.playerNumber, gameType);
+				this.secondPlayer = new HumanPlayer(pawnGame, playerName2, this.playerNumber, gameType, this);
 			} else if(this.mode == Mode.HumainRobot){
-				this.firstPlayer = new HumanPlayer(pawnGame, playerName, this.playerNumber, gameType);
+				this.firstPlayer = new HumanPlayer(pawnGame, playerName, this.playerNumber, gameType,this);
 				this.playerNumber++;
-				this.secondPlayer = new AutoPlayer(pawnGame, playerName2, this.playerNumber, gameType);
+				this.secondPlayer = new AutoPlayer(pawnGame, playerName2, this.playerNumber, gameType,this);
 			}
 			this.current = this.secondPlayer;
 		}
@@ -59,17 +61,21 @@ public class GameManager implements Serializable {
 	}
 
 	/**
+	 * This constructor is used to launch a save game
+	 * @param path The path from file to load
+	 */
+	public GameManager(String path){
+		this.loadGame(path);
+	}
+
+	/**
 	 * This method display the grid
 	 */
 	public void displayTheGrid(){
 		if(this.gameType.equals(GraphicType.Console)) {
-			this.gameMenu.gamePage(this.grid);
+			this.gameMenu.gamePage(this.grid, this);
 		} else if (this.gameType.equals(GraphicType.Graphic)){
-			if(this.gameFrame != null){
-				this.gameFrame.dispose();
-			}
-			this.gameFrame = new GameFrame(this.grid);
-			this.gameFrame.repaint();
+			this.gameMenu.gamePage(this.grid, this);
 		}
 	}
 
@@ -233,5 +239,205 @@ public class GameManager implements Serializable {
 		return listCase;
 	}
 
+	/**
+	 * Save this object into a file.
+	 * @param savePath The path of the file.
+	 */
+	public void saveGame(String savePath) {
+		if (savePath != null && !savePath.isEmpty()) {
+			try {
+				FileOutputStream fileOut = new FileOutputStream(savePath);
+				ObjectOutputStream out = new ObjectOutputStream(fileOut);
 
+				out.writeObject(this);
+
+				out.close();
+				fileOut.close();
+
+				System.out.println("[*] Game saved in ".concat(savePath));
+			} catch (IOException i) {
+				i.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Load the game object
+	 * @param gamePath The file to load
+	 * @return true if everything is good else false
+	 */
+	public boolean loadGame(String gamePath) {
+		boolean loaded = false;
+
+		if (gamePath != null && !gamePath.isEmpty()) {
+			GameManager gameManager = null;
+			try {
+				FileInputStream fileIn = new FileInputStream(gamePath);
+				ObjectInputStream in = new ObjectInputStream(fileIn);
+
+				gameManager = (GameManager) in.readObject();
+
+				in.close();
+				fileIn.close();
+			} catch (IOException err) {
+				System.out.println("Error loadGame(gamePath): Cannot open the file at ".concat(gamePath));
+			} catch (ClassNotFoundException err) {
+				System.out.println("Error loadGame(gamePath): Error while extracting objects.");
+			}
+
+			if (gameManager != null) {
+				this.setGameMenu(gameManager.getGameMenu());
+				this.setGameType(gameManager.getGameType());
+				this.setGrid(gameManager.getGrid());
+				this.setMode(gameManager.getMode());
+				this.setCurrent(gameManager.getCurrent());
+				this.setFirstPlayer(gameManager.getFirstPlayer());
+				this.setSecondPlayer(gameManager.getSecondPlayer());
+				this.setPawnGame(gameManager.getPawnGame());
+				this.setPlayerNumber(gameManager.getPlayerNumber());
+				System.out.println("[*] Game loaded.");
+				this.start();
+				loaded = true;
+			}
+		}
+		return loaded;
+	}
+
+
+	/**
+	 * Get the mode
+	 * @return The mode
+	 */
+	public Mode getMode() {
+		return mode;
+	}
+
+	/**
+	 * Get the game menu
+	 * @return The game menu
+	 */
+	public IGameMenu getGameMenu() {
+		return gameMenu;
+	}
+
+	/**
+	 * Get the game type
+	 * @return The game type
+	 */
+	public GraphicType getGameType() {
+		return gameType;
+	}
+
+	/**
+	 * Get the pawn Game
+	 * @return The pawnGame
+	 */
+	public ArrayList<Pawn> getPawnGame() {
+		return pawnGame;
+	}
+
+	/**
+	 * Get the playerNumber
+	 * @return The playerNumber
+	 */
+	public int getPlayerNumber() {
+		return playerNumber;
+	}
+
+	/**
+	 * Get the current player
+	 * @return The current player
+	 */
+	public Player getCurrent() {
+		return current;
+	}
+
+	/**
+	 * Get the first player
+	 * @return The first player
+	 */
+	public Player getFirstPlayer() {
+		return firstPlayer;
+	}
+
+	/**
+	 * Get the second player
+	 * @return The second player
+	 */
+	public Player getSecondPlayer() {
+		return secondPlayer;
+	}
+
+	/**
+	 * Set the pawnGame
+	 * @param pawnGame The pawnGame
+	 */
+	public void setPawnGame(ArrayList<Pawn> pawnGame) {
+		this.pawnGame = pawnGame;
+	}
+
+	/**
+	 * Set the mode
+	 * @param mode The mode
+	 */
+	public void setMode(Mode mode) {
+		this.mode = mode;
+	}
+
+	/**
+	 * Set the gameType
+	 * @param gameType The graphicType
+	 */
+	public void setGameType(GraphicType gameType) {
+		this.gameType = gameType;
+	}
+
+	/**
+	 * Set the grid
+	 * @param grid The grid composed of Square
+	 */
+	public void setGrid(Square[][] grid) {
+		this.grid = grid;
+	}
+
+	/**
+	 * Set the game Menu
+	 * @param gameMenu The game menu
+	 */
+	public void setGameMenu(IGameMenu gameMenu) {
+		this.gameMenu = gameMenu;
+	}
+
+	/**
+	 * Set the current player
+	 * @param current The current player to set
+	 */
+	public void setCurrent(Player current) {
+		this.current = current;
+	}
+
+	/**
+	 * Set the first player
+	 * @param firstPlayer The first player to set
+	 */
+	public void setFirstPlayer(Player firstPlayer) {
+		this.firstPlayer = firstPlayer;
+	}
+
+	/**
+	 * Set the second player
+	 * @param secondPlayer The second player to set
+	 */
+	public void setSecondPlayer(Player secondPlayer) {
+		this.secondPlayer = secondPlayer;
+	}
+
+
+	/**
+	 * Set the player number
+	 * @param playerNumber The player number to set
+	 */
+	public void setPlayerNumber(int playerNumber) {
+		this.playerNumber = playerNumber;
+	}
 }

@@ -18,6 +18,9 @@ public class FirstFramePage extends JFrame {
     private JButton exitButton;
     private ImageIcon image;
 
+    /**
+     * Initialize and create the first frame page with every components
+     */
     public FirstFramePage(){
         super("Zen L'Initié");
         this.setSize(1200,800);
@@ -63,20 +66,36 @@ public class FirstFramePage extends JFrame {
 
     }
 
+    /**
+     * Set an action listener to react with the users interactions
+     * @param a The action listener
+     */
     public void setActionListener(ActionListener a){
         playButton.addActionListener(a);
         rulesButton.addActionListener(a);
         exitButton.addActionListener(a);
     }
 
+    /**
+     * Get the exit button
+     * @return The exit button
+     */
     public JButton getExitButton() {
         return exitButton;
     }
 
+    /**
+     * Get the play button
+     * @return The play button
+     */
     public JButton getPlayButton() {
         return playButton;
     }
 
+    /**
+     * Get the rules button
+     * @return The rules button
+     */
     public JButton getRulesButton() {
         return rulesButton;
     }

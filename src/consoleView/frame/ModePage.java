@@ -7,11 +7,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Mode frame page
+ */
 public class ModePage extends JFrame {
 
     private JButton hHButton;
     private JButton hAButton;
 
+    /**
+     * Initialize and create the mode frame page with every components
+     */
     public ModePage(){
         super("Zen L'Initié");
         this.setSize(1200,800);
@@ -48,11 +54,19 @@ public class ModePage extends JFrame {
         );
     }
 
+    /**
+     * Set an action listener to react with the users interactions
+     * @param a The action listener
+     */
     public void setActionListener(ActionListener a){
         hHButton.addActionListener(a);
         hAButton.addActionListener(a);
     }
 
+    /**
+     * Get the HA button
+     * @return The ha button
+     */
     public JButton getHAButton() {
         return hAButton;
     }

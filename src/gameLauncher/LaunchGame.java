@@ -15,7 +15,7 @@ public class LaunchGame {
 
 	/**
 	 * The entry points of the program
-	 * @param args
+	 * @param args The argument passed in parameter on the command line
 	 */
 	public static void main(String[] args) {
 		AskGameType askGameType = new AskGameType();

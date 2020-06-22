@@ -1,5 +1,6 @@
 package consoleView;
 
+import zenGame.GameManager;
 import zenGame.Mode;
 import zenGame.Square;
 
@@ -12,7 +13,7 @@ public interface IGameMenu {
     public void printFirstPage();
     public Mode initializeMode();
     public void printSecondPage();
-    public void gamePage(Square[][] grid);
+    public void gamePage(Square[][] grid, GameManager gameManager);
     public void rulesPage();
     public void loadPage();
     public void endGamePage();

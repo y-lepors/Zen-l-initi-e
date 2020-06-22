@@ -1,25 +1,27 @@
 package zenGame;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
 
 /**
  * This class allows you to create the auto player
  * @author LePors
  * @version 1.0
  */
-public class AutoPlayer extends Player {
+public class AutoPlayer extends Player implements Serializable {
 
 	private Square[][] grid;
 
 	/**
-	 * Initialize the auto player
+	 Initialize the auto player
 	 * @param myPawn The list of pawn
 	 * @param name The name of the auto player
+	 * @param playerNumber The player's number
+	 * @param gameType The gameType
+	 * @param gameManager The game manager
 	 */
-	public AutoPlayer(ArrayList<Pawn> myPawn, String name, int playerNumber, GraphicType gameType) {
-		super(myPawn, name, playerNumber, gameType);
+	public AutoPlayer(ArrayList<Pawn> myPawn, String name, int playerNumber, GraphicType gameType, GameManager gameManager) {
+		super(myPawn, name, playerNumber, gameType,gameManager);
 	}
 
 	/**
@@ -58,24 +60,9 @@ public class AutoPlayer extends Player {
 
 		System.out.println("Le bot déplace le pion en : y = "+ret[2]+" et x = "+ret[3]
 		+" \n A vous dans 2 secondes !");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		return ret;
 	}
 
-
-
-	/**
-	 * Check if the move is true
-	 * @return true if the move is allowed
-	 */
-	public boolean verifMove() {
-		// TODO - implement AutoPlayer.verifMove
-		throw new UnsupportedOperationException();
-	}
 
 	/**
 	 * Verif every possible move and return an ArrayList with every move

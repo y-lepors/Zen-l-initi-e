@@ -29,23 +29,6 @@ public class Pawn implements Serializable {
 	}
 
 	/**
-	 * This method is used to change the coordinate of pawn
-	 */
-	public void newMove(int x, int y) {
-		if(x < 11 && y < 11 && x >= 0 && x >= 0){
-			this.xOrigin = x;
-			this.yOrigin = y;
-		}
-	}
-
-	/**
-	 * This method is used to eliminate a pawn
-	 */
-	public void eliminatePawn() {
-		this.isAlive = false;
-	}
-
-	/**
 	 * Get the pawn type
 	 * @return the pawn type
 	 */

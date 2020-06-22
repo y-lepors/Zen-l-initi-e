@@ -1,30 +1,30 @@
 package zenGame;
 
-import consoleView.IGameMenu;
-import consoleView.PrintGameMenu;
 
 import javax.swing.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import static java.lang.Integer.parseInt;
 
 /**
  * This class allows you to create a human player
  * @author LePors
  * @version 1.0
  */
-public class HumanPlayer extends Player {
+public class HumanPlayer extends Player implements Serializable {
 
 	private Square[][] grid;
 
 	/**
-	 * Initialize the human player with his pawn list
+	 Initialize the human player with his pawn list
 	 * @param myPawn Player's pawn list
 	 * @param name PLayer's name
+	 * @param playerNumber player's number
+	 * @param gameType The game type
+	 * @param gameManager The game manager
 	 */
-	public HumanPlayer(ArrayList<Pawn> myPawn, String name, int playerNumber, GraphicType gameType) {
-		super(myPawn, name, playerNumber, gameType);
+	public HumanPlayer(ArrayList<Pawn> myPawn, String name, int playerNumber, GraphicType gameType, GameManager gameManager) {
+		super(myPawn, name, playerNumber, gameType, gameManager);
 	}
 
 	/**
@@ -38,6 +38,7 @@ public class HumanPlayer extends Player {
 		System.out.println("Au tour de "+this.name);
 		boolean i = false;
 		do {
+				System.out.println("Tapez \"sq\" pour sauvegarder et quitter");
 				System.out.println("Séléctionnez votre pion :");
 				if(this.gameType == GraphicType.Console) {
 					int[] coordinate = askCoordinate();
@@ -75,9 +76,14 @@ public class HumanPlayer extends Player {
 		do {
 			Scanner sc = new Scanner(System.in);
 			System.out.print("Déplacement possible : ");
+			String s = "";
 			for(int[] j : possibleMove){
 				System.out.print(j[0]+","+j[1]+" | ");
+				if(this.gameType == GraphicType.Graphic){
+					s = s + j[0]+","+j[1]+" | ";
+				}
 			}
+			if(this.gameType == GraphicType.Graphic) JOptionPane.showMessageDialog(null,s);
 			System.out.println("Donnez les coordonnées vers où déplacer le pion :");
 			if(this.gameType == GraphicType.Console) {
 				int[] coordinate = askCoordinate();
@@ -97,18 +103,6 @@ public class HumanPlayer extends Player {
 				}
 			}
 		} while (!k);
-		return ret;
-	}
-
-	/**
-	 * Check if the move is true
-	 * @return true if the move is allowed
-	 */
-	public boolean verifMove() {
-		boolean ret = true;
-
-
-
 		return ret;
 	}
 
